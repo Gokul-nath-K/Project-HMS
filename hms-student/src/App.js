@@ -6,6 +6,7 @@ import Dashboard from './views/dashboard'
 import Profile from './views/profile'
 import Outpass from './views/outpass'
 import { userContext } from './Data/userContext'
+import Complain from './views/complain';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/outpass' element={<Outpass />} />
+            <Route path='/complain' element={<Complain />} />
           </Routes>
         </userContext.Provider>
 
