@@ -12,7 +12,7 @@ import com.example.main.repository.DashboardRepo;
 import com.example.main.repository.StudentLoginRepo;
 
 @Service
-public class ApiService {
+public class StudentService {
 	
 	@Autowired
 	StudentLoginRepo repo1;
