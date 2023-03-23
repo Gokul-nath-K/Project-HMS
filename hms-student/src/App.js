@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import Login from './views/login';
+import Dashboard from './views/dashboard'
+import Profile from './views/profile'
+import Outpass from './views/outpass'
+import { userContext } from './Data/userContext'
 
 function App() {
+
+  const [user, setUser] = useState({});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="App">
+        <userContext.Provider value={{ user, setUser }}>
+          <Routes>
+            <Route exact path='/' element={<Login />} />
+            <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/outpass' element={<Outpass />} />
+          </Routes>
+        </userContext.Provider>
+
+      </div>
+    </>
   );
 }
 

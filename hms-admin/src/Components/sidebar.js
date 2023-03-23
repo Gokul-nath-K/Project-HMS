@@ -39,7 +39,7 @@ export default function Sidebar() {
                 </Link>
             </li>
             <li className="nav-item">
-                <Link to="/attendance" className="nav-link ">
+                <Link to="/complaint" className="nav-link ">
                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                     <i className="ni ni-books text-warning text-sm opacity-10" />
                 </div>
