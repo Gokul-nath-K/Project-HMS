@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
-import com.example.main.service.ApiService;
+import com.example.main.service.StudentService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,14 +24,14 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
 @RequestMapping("/api/students")
-public class ApiController {
+public class StudentController {
 	
 	@Autowired
-	ApiService service;
+	StudentService service;
 	
 	@Operation(summary = "Creates a new Student")
 	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Student created successfully"),
-			     @ApiResponse(responseCode = "400",description = "Student is invalid")})
+			     @ApiResponse(responseCode = "400",description = "Student's Credentials are invalid")})
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes = "application/json",value = "/post")
 	public String post(@RequestBody StudentUsers S) {
@@ -41,7 +41,7 @@ public class ApiController {
 	
 	@Operation(summary = "Checks the Student trying to Login")
 	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Student logged in successfully"),
-			     @ApiResponse(responseCode = "400",description = "Student's credentials is invalid")})
+			     @ApiResponse(responseCode = "400",description = "Student's credentials are invalid")})
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes = "application/json",value = "/logincheck")
 	public boolean logincheck(@RequestBody StudentUsers S) {
@@ -50,7 +50,7 @@ public class ApiController {
 	
 	@Operation(summary = "Creates a new Student")
 	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Student created successfully"),
-			     @ApiResponse(responseCode = "400",description = "Student is invalid")})
+			     @ApiResponse(responseCode = "400",description = "Student's Credentials are invalid")})
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes = "application/json",value = "/create")
 	public String create(@RequestBody StudentDashboard S) {
