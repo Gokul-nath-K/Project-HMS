@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../App.css';
 import { userContext } from '../Data/userContext'
+import { loginUser } from '../services/login';
 export default function Login() {
 
     const { user, setUser } = useContext(userContext);
@@ -71,16 +72,28 @@ export default function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (Object.keys(error).length === 0) {
+        try {
+            if (Object.keys(error).length === 0) {
 
-            if (user.email === 'gokul@gmail.com' && user.password === 'pineapple52') {
+                loginUser(user).then((res) => {
 
-                navigate('/dashboard')
+                    if (res.data) {
+
+                        localStorage.setItem("rollno", user.rollno);
+                        localStorage.setItem("email", user.email);
+                        localStorage.setItem("password", user.password);
+
+                        navigate('/dashboard')
+                    }
+                    else {
+
+                        alert('invalid email and password')
+                    }
+                })
             }
-            else {
-
-                alert('invalid email and password')
-            }
+        }
+        catch (err) {
+            console.log(`Error: ${err.message}`);
         }
     }
     return (
