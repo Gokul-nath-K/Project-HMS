@@ -1,7 +1,15 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Sidebar() {
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+
+        localStorage.clear();
+        navigate("/")
+    }
 
     return (
         <>
@@ -49,7 +57,7 @@ export default function Sidebar() {
                             </div>
                         </div>
                     </div>
-                    <Link to="/" className="btn btn-danger btn-sm w-50 mb-3">Logout</Link>
+                    <button onClick={handleLogout} className="btn btn-danger btn-sm w-50 mb-3">Logout</button>
                 </div>
             </aside>
 
