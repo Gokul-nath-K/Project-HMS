@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/students")
 public class StudentController {
 	
@@ -62,8 +64,8 @@ public class StudentController {
 	@Operation(summary = "Get a Student with rollno")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Student successfully"),
 	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
-	@GetMapping(produces = "application/json",value = "/get/id={id}")
-	public Optional<StudentDashboard> getbyId(@PathVariable String id){
+	@GetMapping(produces = "application/json",value = "/get/{id}")
+	public Optional<StudentDashboard> getbyId(@PathVariable("id") String id){
 		
 		return service.getById(id);
 	}
