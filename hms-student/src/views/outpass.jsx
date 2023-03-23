@@ -222,7 +222,7 @@ export default function Outpass() {
                         <div className="col-md-12">
                           <button
                             type="submit"
-                            className="btn btn-success btn-send  pt-2 btn-block"
+                            className="btn btn-success btn-send  pt-2 btn-block mt-3"
                           >
                             Send request
                           </button>
