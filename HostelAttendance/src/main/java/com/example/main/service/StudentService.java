@@ -10,11 +10,13 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.main.model.Complaint;
+import com.example.main.model.Outpass;
 import com.example.main.model.SOSTable;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.DashboardRepo;
+import com.example.main.repository.OutpassRepo;
 import com.example.main.repository.SOSRepo;
 import com.example.main.repository.StudentLoginRepo;
 
@@ -29,6 +31,8 @@ public class StudentService {
 	ComplaintRepo complaint;
 	@Autowired
 	SOSRepo sos;
+	@Autowired
+	OutpassRepo outpass;
 	
 	
 	public void post(StudentUsers S) {
@@ -106,6 +110,10 @@ public class StudentService {
 		Date datetime = new Date();
 		S.setDatetime(dateFormatter.format(datetime));
 		sos.save(S);
+	}
+
+	public void postOutpass(Outpass O){
+		outpass.save(O);
 	}
 
 }

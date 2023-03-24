@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.main.model.Complaint;
+import com.example.main.model.Outpass;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.service.StudentService;
@@ -90,6 +91,14 @@ public class StudentController {
 		service.postComplaint(C);
 	}
 
+	@Operation(summary = "Gets Outpass Request from a Student")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Request received successfully"),
+			     @ApiResponse(responseCode = "400",description = "NIL")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/outpass")
+	public void postOutpass(@RequestBody Outpass O) {
+		service.postOutpass(O);
+	}
 	
 
 	@Operation(summary = "Gets a SOS Message from a Student")
