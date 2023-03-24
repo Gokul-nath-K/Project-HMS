@@ -66,10 +66,6 @@ public class AdminService {
 	public Optional<AdminDashboard> getById(String admincode){
 		return profile.findById(admincode);
 	}
-	
-	public List<AdminDashboard> readAll(){
-		return profile.findAll();
-	}
 
 	public List<Outpass> getAllPendingOutpass(String status) {
 		return outpass.getAllPendingOutpass(status);	
@@ -81,7 +77,7 @@ public class AdminService {
 	@Transactional
 	public Integer updateOutpass(String status, int id){
 		
-		return op.updateOutpass(status, id);
+		return outpass.updateOutpass(status, id);
 		
 		
 	}

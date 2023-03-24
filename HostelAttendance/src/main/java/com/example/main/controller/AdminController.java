@@ -68,19 +68,10 @@ public class AdminController {
 	@Operation(summary = "Get a Admin with admincode")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Admin successfully"),
 	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
-	@GetMapping(produces = "application/json",value = "/get/id={id}")
+	@GetMapping(produces = "application/json",value = "/get/{id}")
 	public Optional<AdminDashboard> getbyId(@PathVariable String id){
 		
 		return service.getById(id);
-	}
-	
-	@Operation(summary = "Get all the Admins")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Admins successfully"),
-	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/getall")
-	public List<AdminDashboard> readAll(){
-		
-		return service.readAll();
 	}
 	
 	@Operation(summary = "Get all the pending outpasses")
