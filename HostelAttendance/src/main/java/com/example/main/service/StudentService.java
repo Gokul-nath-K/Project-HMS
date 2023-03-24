@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.main.model.Complaint;
+import com.example.main.model.SOSTable;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.repository.ComplaintRepo;
@@ -91,6 +92,14 @@ public class StudentService {
 		else {
 			return complaint.findAll(Field1.and(Field2).descending());
 		}
+	}
+
+	public void postSOS(SOSTable S) {
+
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date datetime = new Date();
+		S.setDatetime(dateFormatter.format(datetime));
+		sos.save(S);
 	}
 
 }

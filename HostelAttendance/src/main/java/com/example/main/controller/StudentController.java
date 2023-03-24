@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.main.model.Complaint;
 import com.example.main.model.StudentDashboard;
-import com.example.main.model.StudentUsers;
 import com.example.main.service.StudentService;
+import com.example.main.model.SOSTable;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -103,6 +103,15 @@ public class StudentController {
 	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
 		
 		return service.sortbygroup(field1,field2,ch);
+	}
+
+	@Operation(summary = "Gets a SOS Message from a Student")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "SOS Message received successfully"),
+			     @ApiResponse(responseCode = "400",description = "NIL")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/SOS")
+	public void postSOS(@RequestBody SOSTable S) {
+		service.postSOS(S);
 	}
 
 }
