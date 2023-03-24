@@ -74,7 +74,6 @@ public class AdminService {
 	public List<Outpass> getAllOutpass(String status) {
 		return op.getAllOutpass(status);	
 	}
-<<<<<<< HEAD
 	@Transactional
 	public Integer updateOutpass(String status, int id){
 		
@@ -82,7 +81,6 @@ public class AdminService {
 		
 		
 	}
-=======
 
 	public List<Outpass> sortbyoutdate() {
 
@@ -108,5 +106,4 @@ public class AdminService {
 		}
 	}
 	
->>>>>>> b9bd6b29c78dec08ef043d203e2452e4dd667d01
 }
