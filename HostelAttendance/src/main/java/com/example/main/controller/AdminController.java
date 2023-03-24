@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -125,6 +126,24 @@ public class AdminController {
 	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
 		
 		return service.sortbygroup(field1,field2,ch);
+	}
+
+	@Operation(summary = "Gets all the SOS Requests")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sosrequest")
+	public List<SOSTable> sosrequest(){
+		
+		return service.sosrequest();
+	}
+	
+	@Operation(summary = "Reviews the SOS Request")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are approved/inprogress"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/sosrequest")
+	public void sosapproval(@RequestBody SOSTable S){
+		
+		service.sosapproval(S);
 	}
 
 }

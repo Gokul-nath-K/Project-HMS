@@ -10,32 +10,36 @@ import org.springframework.stereotype.Service;
 import com.example.main.model.AdminDashboard;
 import com.example.main.model.AdminUsers;
 import com.example.main.model.Outpass;
+import com.example.main.model.SOSTable;
 import com.example.main.model.Complaint;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.OutpassRepo;
+import com.example.main.repository.SOSRepo;
 
 @Service
 public class AdminService {
 
 	@Autowired
-	AdminUsersRepo repo1;
+	AdminUsersRepo login;
 	@Autowired
-	AdminDashboardRepo repo2;
-	@Autowired
-	OutpassRepo op;
+	AdminDashboardRepo profile;
 	@Autowired
 	ComplaintRepo complaint;
+	@Autowired
+	OutpassRepo outpass;
+	@Autowired
+	SOSRepo sos;
 	
 	public void post(AdminUsers A) {
-		repo1.save(A);
+		login.save(A);
 	}
 	
 	public boolean logincheck(AdminUsers A) {
 		
-		if(repo1.existsById(A.getAdmincode())) {
-			AdminUsers exists = repo1.getById(A.getAdmincode());
+		if(login.existsById(A.getAdmincode())) {
+			AdminUsers exists = login.getById(A.getAdmincode());
 			if(exists.getEmail().equals(A.getEmail())) {
 				if(exists.getPassword().equals(A.getPassword())) {
 					return true;
@@ -54,28 +58,28 @@ public class AdminService {
 	}
 	
 	public void create(AdminDashboard A) {
-		repo2.save(A);
+		profile.save(A);
 	}
 	
 	public Optional<AdminDashboard> getById(String admincode){
-		return repo2.findById(admincode);
+		return profile.findById(admincode);
 	}
 	
 	public List<AdminDashboard> readAll(){
-		return repo2.findAll();
+		return profile.findAll();
 	}
 
 	public List<Outpass> getAllPendingOutpass(String status) {
-		return op.getAllPendingOutpass(status);	
+		return outpass.getAllPendingOutpass(status);	
 	}
 	
 	public List<Outpass> getAllOutpass(String status) {
-		return op.getAllOutpass(status);	
+		return outpass.getAllOutpass(status);	
 	}
 
 	public List<Outpass> sortbyoutdate() {
 
-		return op.findAll(Sort.by("outdt"));
+		return outpass.findAll(Sort.by("outdt"));
 	}
 
 	public List<Complaint> sortbyfield(String field, int ch) {
@@ -95,6 +99,16 @@ public class AdminService {
 		} else {
 			return complaint.findAll(Field1.and(Field2).descending());
 		}
+	}
+
+	public List<SOSTable> sosrequest() {
+
+		return sos.findAll(Sort.by("datetime").ascending());
+	}
+
+	public void sosapproval(SOSTable S) {
+		
+		sos.sosapproval(S.getRollno());
 	}
 	
 }
