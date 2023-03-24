@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.main.model.AdminDashboard;
+import com.example.main.model.Complaint;
 import com.example.main.model.AdminUsers;
 import com.example.main.model.Outpass;
 import com.example.main.service.AdminService;
+import com.example.main.model.SOSTable;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -106,6 +108,33 @@ public class AdminController {
 	public String updateOutpass(@RequestParam String status, @RequestParam int id){
 		
 		return service.updateOutpass(status, id) + " one record updated";
+	}
+
+	@Operation(summary = "Get the Outpass Requests in sorted manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are sorted successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyoutdate")
+	public List<Outpass> sortbyoutdate(){
+		
+		return service.sortbyoutdate();
+	}
+	
+	@Operation(summary = "Get the Complaints in sorted manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyfield/{field}/{ch}")
+	public List<Complaint> sortbyfield(@PathVariable String field,@PathVariable int ch){
+		
+		return service.sortbyfield(field,ch);
+	}
+
+	@Operation(summary = "Get the Complaints in sortByGroup manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted by group successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyfield/{field1}/{field2}/{ch}")
+	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
+		
+		return service.sortbygroup(field1,field2,ch);
 	}
 
 }

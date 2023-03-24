@@ -39,6 +39,11 @@ export default function Outpass() {
         setOutpass({ ...outpass, datein: value });
 
         break;
+      
+      case "reason":
+          setOutpass({ ...outpass, reason: value });
+
+        break;
 
       default:
         break;
@@ -62,6 +67,10 @@ export default function Outpass() {
 
     if (!value.room) {
       errors.room = "Please enter room number";
+    }
+    
+    if (!value.reason) {
+      errors.reason = "Please enter room number";
     }
 
     return errors;
@@ -116,6 +125,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
+                                justifyContent: "flex-end"
                               }}
                             >
                               {error.name}
@@ -140,6 +150,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
+                                justifyContent: "flex-end"
                               }}
                             >
                               {error.rollno}
@@ -187,6 +198,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
+                                justifyContent: "flex-end"
                               }}
                             >
                               {error.room}
@@ -218,6 +230,33 @@ export default function Outpass() {
                           </div>
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="form-group">
+                            <label>Reason</label>
+                            <textarea
+                              onChange={handleChange}
+                              name="reason"
+                              className="form-control"
+                              placeholder="Write your message here."
+                              rows="4"
+                            ></textarea>
+                            <span
+                              style={{
+                                color: "red",
+                                fontSize: "small",
+                                textAlign: "start",
+                                display: "flex",
+                                padding: 4,
+                                paddingLeft: 10,
+                                justifyContent: "flex-end"
+                              }}
+                            >
+                              {error.reason}
+                            </span>
+                          </div>
+                        </div>
+                        </div>
                       <div className="row">
                         <div className="col-md-12">
                           <button
