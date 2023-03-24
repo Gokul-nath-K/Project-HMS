@@ -87,23 +87,7 @@ public class StudentController {
 		service.postComplaint(C);
 	}
 
-	@Operation(summary = "Get the Complaints in sorted manner")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
-	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/sortbyfield/{field}/{ch}")
-	public List<Complaint> sortbyfield(@PathVariable String field,@PathVariable int ch){
-		
-		return service.sortbyfield(field,ch);
-	}
-
-	@Operation(summary = "Get the Complaints in sortByGroup manner")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted by group successfully"),
-	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/sortbyfield/{field1}/{field2}/{ch}")
-	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
-		
-		return service.sortbygroup(field1,field2,ch);
-	}
+	
 
 	@Operation(summary = "Gets a SOS Message from a Student")
 	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "SOS Message received successfully"),
