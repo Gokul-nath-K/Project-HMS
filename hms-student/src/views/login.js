@@ -1,11 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../App.css';
-import { userContext } from '../Data/userContext'
 import { loginUser } from '../services/login';
 export default function Login() {
 
-    const { user, setUser } = useContext(userContext);
+    const [user, setUser] = useState({});
 
     const [error, setError] = useState({});
     const navigate = useNavigate();
@@ -69,6 +68,8 @@ export default function Login() {
 
     }, [user])
 
+  const [temp, setTemp] = useState();
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -77,6 +78,8 @@ export default function Login() {
 
                 loginUser(user).then((res) => {
 
+                    setTemp(res.data);
+                    console.log(res.data);
                     if (res.data) {
 
                         localStorage.setItem("rollno", user.rollno);
@@ -87,8 +90,9 @@ export default function Login() {
                     }
                     else {
 
-                        alert('invalid email and password')
+                        alert('Invalid email and password')
                     }
+                    console.log(temp);
                 })
             }
         }
