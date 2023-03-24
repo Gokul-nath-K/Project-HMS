@@ -14,3 +14,8 @@ export const postComplains = (complains) => {
 
     return axios.post(`http://localhost:8080/api/students/complaint`, complains)
 }
+
+export const postOutpass = (outpass) => {
+
+    return axios.post(`http://localhost:8080/api/students/outpass`, outpass)
+}
