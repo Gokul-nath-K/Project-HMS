@@ -18,6 +18,8 @@ import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.OutpassRepo;
 import com.example.main.repository.SOSRepo;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class AdminService {
 
@@ -75,6 +77,13 @@ public class AdminService {
 	
 	public List<Outpass> getAllOutpass(String status) {
 		return outpass.getAllOutpass(status);	
+	}
+	@Transactional
+	public Integer updateOutpass(String status, int id){
+		
+		return op.updateOutpass(status, id);
+		
+		
 	}
 
 	public List<Outpass> sortbyoutdate() {

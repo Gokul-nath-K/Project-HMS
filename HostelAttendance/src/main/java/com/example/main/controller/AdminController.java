@@ -100,6 +100,15 @@ public class AdminController {
 		
 		return service.getAllOutpass(status);
 	}
+	
+	@Operation(summary = "update outpass status")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "outpass status updated successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/updateoutpass")
+	public String updateOutpass(@RequestParam String status, @RequestParam int id){
+		
+		return service.updateOutpass(status, id) + " one record updated";
+	}
 
 	@Operation(summary = "Get the Outpass Requests in sorted manner")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are sorted successfully"),

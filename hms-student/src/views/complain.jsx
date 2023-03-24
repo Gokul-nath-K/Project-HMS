@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
+import { postComplains } from "../services/studentService";
 
 export default function Complain() {
   const [complains, setComplain] = useState({});
@@ -74,7 +75,11 @@ export default function Complain() {
     e.preventDefault();
 
     if (Object.keys(error).length === 0) {
-      console.log(complains);
+      try {
+        postComplains(complains).then();
+      } catch (err) {
+        console.log(`Error: ${err.message}`);
+      }
     } else {
       console.log("enter valid form details");
     }
