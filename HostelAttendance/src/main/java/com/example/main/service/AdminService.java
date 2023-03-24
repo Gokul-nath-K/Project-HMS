@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.main.model.AdminDashboard;
 import com.example.main.model.AdminUsers;
+import com.example.main.model.Outpass;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
+import com.example.main.repository.OutpassRepo;
 
 @Service
 public class AdminService {
@@ -18,6 +20,8 @@ public class AdminService {
 	AdminUsersRepo repo1;
 	@Autowired
 	AdminDashboardRepo repo2;
+	@Autowired
+	OutpassRepo op;
 	
 	public void post(AdminUsers A) {
 		repo1.save(A);
@@ -54,6 +58,14 @@ public class AdminService {
 	
 	public List<AdminDashboard> readAll(){
 		return repo2.findAll();
+	}
+
+	public List<Outpass> getAllPendingOutpass(String status) {
+		return op.getAllPendingOutpass(status);	
+	}
+	
+	public List<Outpass> getAllOutpass(String status) {
+		return op.getAllOutpass(status);	
 	}
 	
 }
