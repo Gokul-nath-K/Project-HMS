@@ -13,6 +13,8 @@ import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
 import com.example.main.repository.OutpassRepo;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class AdminService {
 
@@ -67,5 +69,11 @@ public class AdminService {
 	public List<Outpass> getAllOutpass(String status) {
 		return op.getAllOutpass(status);	
 	}
-	
+	@Transactional
+	public Integer updateOutpass(String status, int id){
+		
+		return op.updateOutpass(status, id);
+		
+		
+	}
 }
