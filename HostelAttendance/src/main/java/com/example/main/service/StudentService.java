@@ -81,4 +81,16 @@ public class StudentService {
 		}
 	}
 
+	public List<Complaint> sortbygroup(String field1,String field2,int ch){
+		
+		Sort Field1 = Sort.by(field1);
+		Sort Field2 = Sort.by(field2);
+		if(ch == 0) {
+			return complaint.findAll(Field1.and(Field2));
+		}
+		else {
+			return complaint.findAll(Field1.and(Field2).descending());
+		}
+	}
+
 }

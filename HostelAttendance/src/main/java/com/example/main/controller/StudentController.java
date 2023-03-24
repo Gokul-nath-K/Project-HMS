@@ -96,4 +96,13 @@ public class StudentController {
 		return service.sortbyfield(field,ch);
 	}
 
+	@Operation(summary = "Get the Complaints in sortByGroup manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted by group successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyfield/{field1}/{field2}/{ch}")
+	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
+		
+		return service.sortbygroup(field1,field2,ch);
+	}
+
 }
