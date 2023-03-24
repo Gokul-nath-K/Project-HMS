@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.main.model.AdminDashboard;
@@ -12,6 +13,7 @@ import com.example.main.model.Outpass;
 import com.example.main.model.Complaint;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
+import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.OutpassRepo;
 
 @Service
@@ -23,6 +25,8 @@ public class AdminService {
 	AdminDashboardRepo repo2;
 	@Autowired
 	OutpassRepo op;
+	@Autowired
+	ComplaintRepo complaint;
 	
 	public void post(AdminUsers A) {
 		repo1.save(A);
@@ -71,7 +75,7 @@ public class AdminService {
 
 	public List<Outpass> sortbyoutdate() {
 
-		return outpass.findAll(Sort.by("outdt"));
+		return op.findAll(Sort.by("outdt"));
 	}
 
 	public List<Complaint> sortbyfield(String field, int ch) {
