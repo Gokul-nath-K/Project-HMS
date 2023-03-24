@@ -1,0 +1,91 @@
+.modal-window {
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.25);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    box-shadow:
+    1.4px 0.9px 2.2px rgba(0, 0, 0, 0.014),
+    3.5px 2.2px 5.3px rgba(0, 0, 0, 0.027),
+    6.5px 4.1px 10px rgba(0, 0, 0, 0.041),
+    11.6px 7.4px 17.9px rgba(0, 0, 0, 0.056),
+    21.7px 13.8px 33.4px rgba(0, 0, 0, 0.077),
+    52px 33px 80px rgba(0, 0, 0, 0.12)
+  ;
+  
+  }
+  
+  .modal-window:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-window > div {
+    width: 80vw;
+    height: 80vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background: white;
+  }
+  .modal-window header {
+    font-weight: bold;
+  }
+  .modal-window h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+  
+  .modal-close {
+    color: #aaa;
+    line-height: 50px;
+    font-size: 80%;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 70px;
+    text-decoration: none;
+  }
+  .modal-close:hover {
+    color: black;
+  }
+  
+  
+  
+  .containermxz {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .modal-window > div {
+    border-radius: 1rem;
+  }
+  
+  .modal-window div:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+  
+  
+  
+  
+  
+  .btnmxz {
+    background-color: white;
+    padding: 1em 1.5em;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
+  .btnmxz i {
+    padding-right: 0.3em;
+  }
