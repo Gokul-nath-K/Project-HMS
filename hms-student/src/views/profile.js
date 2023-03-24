@@ -79,7 +79,7 @@ export default function Profile() {
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Date of birth</label>
-                                                <input className="form-control" type="text" value={!student ? "dd/MM/yyyy" : "dd/MM/yyyy"} />
+                                                <input className="form-control" type="text" value={!student ? "dd/MM/yyyy" : student.dob} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
