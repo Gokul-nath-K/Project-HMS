@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.main.model.AdminDashboard;
 import com.example.main.model.AdminUsers;
 import com.example.main.model.Outpass;
+import com.example.main.model.Complaint;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
+import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.OutpassRepo;
 
 import jakarta.transaction.Transactional;
@@ -24,6 +27,8 @@ public class AdminService {
 	AdminDashboardRepo repo2;
 	@Autowired
 	OutpassRepo op;
+	@Autowired
+	ComplaintRepo complaint;
 	
 	public void post(AdminUsers A) {
 		repo1.save(A);
@@ -69,6 +74,7 @@ public class AdminService {
 	public List<Outpass> getAllOutpass(String status) {
 		return op.getAllOutpass(status);	
 	}
+<<<<<<< HEAD
 	@Transactional
 	public Integer updateOutpass(String status, int id){
 		
@@ -76,4 +82,31 @@ public class AdminService {
 		
 		
 	}
+=======
+
+	public List<Outpass> sortbyoutdate() {
+
+		return op.findAll(Sort.by("outdt"));
+	}
+
+	public List<Complaint> sortbyfield(String field, int ch) {
+		if (ch == 0) {
+			return complaint.findAll(Sort.by(field));
+		} else {
+			return complaint.findAll(Sort.by(field).descending());
+		}
+	}
+
+	public List<Complaint> sortbygroup(String field1, String field2, int ch) {
+
+		Sort Field1 = Sort.by(field1);
+		Sort Field2 = Sort.by(field2);
+		if (ch == 0) {
+			return complaint.findAll(Field1.and(Field2));
+		} else {
+			return complaint.findAll(Field1.and(Field2).descending());
+		}
+	}
+	
+>>>>>>> b9bd6b29c78dec08ef043d203e2452e4dd667d01
 }
