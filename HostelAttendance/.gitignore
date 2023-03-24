@@ -33,4 +33,11 @@ build/
 .vscode/
 
 ### Sensitive Data ###
+<<<<<<< HEAD
 src/main/resources/application.properties
+=======
+src/main/resources/application.properties
+
+### properties ###
+.properties
+>>>>>>> 1b3d9f2ad84672ac0052018a0042e72f302d6d61
