@@ -1,9 +1,12 @@
 package com.example.main.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.main.model.Complaint;
@@ -12,6 +15,7 @@ import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.DashboardRepo;
+import com.example.main.repository.SOSRepo;
 import com.example.main.repository.StudentLoginRepo;
 
 @Service
@@ -23,6 +27,8 @@ public class StudentService {
 	DashboardRepo profile;
 	@Autowired
 	ComplaintRepo complaint;
+	@Autowired
+	SOSRepo sos;
 	
 	
 	public void post(StudentUsers S) {
