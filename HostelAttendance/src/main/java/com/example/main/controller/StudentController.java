@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.main.model.Complaint;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.service.StudentService;
@@ -24,7 +24,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
-@CrossOrigin
 @RequestMapping("/api/students")
 public class StudentController {
 	
@@ -64,8 +63,8 @@ public class StudentController {
 	@Operation(summary = "Get a Student with rollno")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Student successfully"),
 	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
-	@GetMapping(produces = "application/json",value = "/get/{id}")
-	public Optional<StudentDashboard> getbyId(@PathVariable("id") String id){
+	@GetMapping(produces = "application/json",value = "/get/id={id}")
+	public Optional<StudentDashboard> getbyId(@PathVariable String id){
 		
 		return service.getById(id);
 	}
@@ -77,6 +76,24 @@ public class StudentController {
 	public List<StudentDashboard> readAll(){
 		
 		return service.readAll();
+	}
+	
+	@Operation(summary = "Gets a Complaint/Query from a Student")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Complaint/Query received successfully"),
+			     @ApiResponse(responseCode = "400",description = "NIL")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/complaint")
+	public void postComplaint(@RequestBody Complaint C) {
+		service.postComplaint(C);
+	}
+
+	@Operation(summary = "Get the Complaints in sorted manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyfield/{field}/{ch}")
+	public List<Complaint> sortbyfield(@PathVariable String field,@PathVariable int ch){
+		
+		return service.sortbyfield(field,ch);
 	}
 
 }

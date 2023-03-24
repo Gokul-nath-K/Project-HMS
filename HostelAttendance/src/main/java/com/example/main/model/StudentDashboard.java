@@ -17,6 +17,7 @@ public class StudentDashboard {
 	private String dept;
 	private int year;
 	private String block;
+	private String dob;
 	private int roomno;
 	private String bloodgroup;
 	private long personal_phone;
@@ -25,7 +26,7 @@ public class StudentDashboard {
 		
 	}
 	public StudentDashboard(String rollno, String name, String email, String dept, int year, String block, int roomno,
-			String bloodgroup, long personal_phone, long guardian_phone) {
+			String bloodgroup, long personal_phone, long guardian_phone,String dob) {
 		super();
 		this.rollno = rollno;
 		this.name = name;
@@ -37,12 +38,19 @@ public class StudentDashboard {
 		this.bloodgroup = bloodgroup;
 		this.personal_phone = personal_phone;
 		this.guardian_phone = guardian_phone;
+		this.dob = dob;
 	}
 	public String getRollno() {
 		return rollno;
 	}
 	public void setRollno(String rollno) {
 		this.rollno = rollno;
+	}
+	public String getDob() {
+		return dob;
+	}
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 	public String getName() {
 		return name;
