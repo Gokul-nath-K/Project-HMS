@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -98,6 +99,15 @@ public class AdminController {
 	public List<Outpass> getAllOutpass(@RequestParam String status){
 		
 		return service.getAllOutpass(status);
+	}
+	
+	@Operation(summary = "update outpass status")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "outpass status updated successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/updateoutpass")
+	public String updateOutpass(@RequestParam String status, @RequestParam int id){
+		
+		return service.updateOutpass(status, id) + " one record updated";
 	}
 
 	@Operation(summary = "Get the Outpass Requests in sorted manner")
