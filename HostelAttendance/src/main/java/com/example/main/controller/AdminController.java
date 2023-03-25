@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.main.model.AdminDashboard;
 import com.example.main.model.Complaint;
 import com.example.main.model.AdminUsers;
+import com.example.main.model.Announcement;
 import com.example.main.model.Outpass;
 import com.example.main.service.AdminService;
 import com.example.main.model.SOSTable;
@@ -144,6 +145,16 @@ public class AdminController {
 	public void sosapproval(@RequestBody SOSTable S){
 		
 		service.sosapproval(S);
+	}
+
+	@Operation(summary = "Creates a Circular/Announcement to the Students")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Circular/Announcement created successfully"),
+			     @ApiResponse(responseCode = "400",description = "Entriels are invalid")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/announcement")
+	public void announcement(@RequestBody Announcement A) {
+		
+		service.announcement(A);
 	}
 
 }

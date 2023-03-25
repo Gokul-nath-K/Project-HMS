@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.main.model.Announcement;
 import com.example.main.model.Complaint;
 import com.example.main.model.Outpass;
 import com.example.main.model.SOSTable;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
+import com.example.main.repository.AnnouncementRepo;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.DashboardRepo;
 import com.example.main.repository.OutpassRepo;
@@ -33,6 +35,8 @@ public class StudentService {
 	SOSRepo sos;
 	@Autowired
 	OutpassRepo outpass;
+	@Autowired
+	AnnouncementRepo announcement;
 	
 	
 	public void post(StudentUsers S) {
@@ -114,6 +118,11 @@ public class StudentService {
 
 	public void postOutpass(Outpass O){
 		outpass.save(O);
+	}
+
+	public List<Announcement> announcement(){
+		
+		return announcement.findAll(Sort.by("date").and(Sort.by("time")).descending());
 	}
 
 }

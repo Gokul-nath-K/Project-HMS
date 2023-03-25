@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.main.model.Announcement;
 import com.example.main.model.Complaint;
 import com.example.main.model.Outpass;
 import com.example.main.model.StudentDashboard;
@@ -108,6 +109,15 @@ public class StudentController {
 	@PostMapping(consumes = "application/json",value = "/SOS")
 	public void postSOS(@RequestBody SOSTable S) {
 		service.postSOS(S);
+	}
+
+	@Operation(summary = "Displays the Circular/Announcement to the Students")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Announcement/Circular successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Circular/Announcement")})
+	@GetMapping(produces = "application/json",value = "/announcement")
+	public List<Announcement> announcement(){
+		
+		return service.announcement();
 	}
 
 }

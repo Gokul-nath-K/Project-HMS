@@ -1,5 +1,7 @@
 package com.example.main.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,11 +11,13 @@ import org.springframework.stereotype.Service;
 
 import com.example.main.model.AdminDashboard;
 import com.example.main.model.AdminUsers;
+import com.example.main.model.Announcement;
 import com.example.main.model.Outpass;
 import com.example.main.model.SOSTable;
 import com.example.main.model.Complaint;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
+import com.example.main.repository.AnnouncementRepo;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.OutpassRepo;
 import com.example.main.repository.SOSRepo;
@@ -33,6 +37,8 @@ public class AdminService {
 	OutpassRepo outpass;
 	@Autowired
 	SOSRepo sos;
+	@Autowired
+	AnnouncementRepo announcement;
 	
 	public void post(AdminUsers A) {
 		login.save(A);
@@ -114,6 +120,17 @@ public class AdminService {
 	public void sosapproval(SOSTable S) {
 		
 		sos.sosapproval(S.getRollno());
+	}
+
+	public void announcement(Announcement A) {
+		
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
+		Date date = new Date();
+		SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm aa");
+		Date time = new Date();
+		A.setDate(dateFormatter.format(date));
+		A.setTime(timeFormatter.format(time));
+		announcement.save(A);
 	}
 	
 }
