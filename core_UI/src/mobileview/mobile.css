@@ -1,0 +1,389 @@
+.cardmxz{
+    box-shadow:
+    2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+    6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+    12.5px 12.5px 10px rgba(0, 0, 0, 0.035),
+    22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+    41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05),
+    100px 100px 80px rgba(0, 0, 0, 0.07) !important
+  ;
+  background-color: #fff !important;
+}
+.logincompx{
+    background-image: 
+        url("https://ik.imagekit.io/gokul/hms-mobile/imgbg.svg?updatedAt=1679743376177");
+}
+
+
+/* appbar */
+
+.tabbar {
+    --primary: #275EFE;
+    --background: #000000;
+    --icon-active: #fff;
+    --x: 64px;
+    width: 100%;
+    margin: 0;
+    padding: 0 16px;
+
+    list-style: none;
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    background: var(--background);
+  }
+
+
+  .tabbar li a {
+    display: block;
+    padding: 20px 0;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    transition: transform 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .tabbar li a div {
+    --y: 0;
+    width: 32px;
+    height: 32px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    transform: translateY(var(--y));
+  }
+  .tabbar li a div svg {
+    display: block;
+    width: 32px;
+    height: 32px;
+    fill: rgba(255, 255, 255, 0);
+    stroke-width: 1px;
+    stroke: var(--primary);
+  }
+  .tabbar li a div:before {
+    --s-x: 1;
+    --s-y: 1;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 1;
+    transform: scaleX(var(--s-x)) scaleY(var(--s-y));
+  }
+  .tabbar li a.box div:before {
+    --s-x: .75;
+    left: 50%;
+    margin-left: -1px;
+    width: 2px;
+    height: 12px;
+    bottom: 4px;
+    border-radius: 1px;
+    background: var(--primary);
+  }
+  .tabbar li a.box div em {
+    --s-x: 1;
+    --s-y: 1;
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+  }
+  .tabbar li a.box div em:before, .tabbar li a.box div em:after {
+    --r: 0deg;
+    content: "";
+    display: block;
+    height: 2px;
+    border-radius: 1px;
+    width: 13px;
+    background: var(--primary);
+    position: absolute;
+    bottom: -1px;
+    transform: rotateZ(var(--r)) translateY(1px) scaleY(0.75);
+  }
+  .tabbar li a.box div em:before {
+    --r: 30deg;
+    right: -1px;
+    transform-origin: 100% 50%;
+  }
+  .tabbar li a.box div em:after {
+    --r: -30deg;
+    left: -1px;
+    transform-origin: 0% 50%;
+  }
+  .tabbar li a.home div:before {
+    --s-x: .75;
+    --s-y: .75;
+    border: 2px solid var(--primary);
+    border-bottom: 0;
+    width: 12px;
+    height: 17px;
+    border-radius: 2px 2px 0 0;
+    left: 50%;
+    bottom: 1px;
+    margin-left: -6px;
+    transform: scale(0.75);
+  }
+  .tabbar li a.calendar div:before {
+    --s-y: .75;
+    height: 2px;
+    width: 22px;
+    background: var(--primary);
+    left: 50%;
+    top: 12px;
+    margin-left: -11px;
+  }
+  .tabbar li a.calendar div em {
+    display: block;
+    position: absolute;
+    top: 3px;
+    left: 50%;
+  }
+  .tabbar li a.calendar div em:before, .tabbar li a.calendar div em:after {
+    content: "";
+    display: block;
+    width: 2px;
+    border-radius: 1px;
+    height: 7px;
+    background: var(--primary);
+    position: absolute;
+    top: 0;
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+    transform: scaleX(0.75);
+    transition: background 0.4s ease;
+  }
+  .tabbar li a.calendar div em:before {
+    right: -6px;
+  }
+  .tabbar li a.calendar div em:after {
+    left: -6px;
+  }
+
+  .tabbar li.move a div {
+    -webkit-animation: icon 1.2s linear forwards;
+            animation: icon 1.2s linear forwards;
+  }
+  .tabbar li.move a div svg {
+    -webkit-animation: svg 1.2s linear forwards;
+            animation: svg 1.2s linear forwards;
+  }
+  .tabbar li.move a.box div:before {
+    -webkit-animation: element-far 1.2s linear forwards;
+            animation: element-far 1.2s linear forwards;
+  }
+  .tabbar li.move a.box div em {
+    -webkit-animation: element-close 1.2s linear forwards;
+            animation: element-close 1.2s linear forwards;
+  }
+  .tabbar li.move a.home div:before {
+    -webkit-animation: element-close 1.2s linear forwards;
+            animation: element-close 1.2s linear forwards;
+  }
+  .tabbar li.move a.calendar div:before {
+    -webkit-animation: element-close 1.2s linear forwards;
+            animation: element-close 1.2s linear forwards;
+  }
+  .tabbar li.move a.calendar div em {
+    -webkit-animation: calendar-2 1.2s linear forwards;
+            animation: calendar-2 1.2s linear forwards;
+  }
+  .tabbar li.move a.calendar div em:before, .tabbar li.move a.calendar div em:after {
+    -webkit-animation: calendar-3 1.2s linear forwards;
+            animation: calendar-3 1.2s linear forwards;
+  }
+  .tabbar.move:before {
+    -webkit-animation: move 1.2s linear forwards;
+            animation: move 1.2s linear forwards;
+  }
+  .tabbar.move:after {
+    -webkit-animation: move-after 1.2s linear forwards;
+            animation: move-after 1.2s linear forwards;
+  }
+  
+  .frame {
+    position: fixed;
+    /* height: 240px; */
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    bottom: 0px;
+    width: 100vw;
+  }
+  
+  * {
+    box-sizing: inherit;
+  }
+  *:before, *:after {
+    box-sizing: inherit;
+  }
+  .activex{
+    color: #fff !important;
+    color: #fff !important;
+    background-color: #ffffff !important;
+    border: none;
+    border-radius: 20px;
+    margin: 0.6rem;
+    padding: 0px;
+  }
+  
+  .call-animation {
+    background: #fff;
+    width: 135px;
+    height: 135px;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 100%;
+    border: solid 5px #fff;
+  
+}
+  .call-animation:before {
+              position: absolute;
+              content: '';
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              animation: play 3s linear infinite;
+              backface-visibility: hidden;
+              border-radius: 50%;
+            }
+ .aertdiv {
+        width: 135px;
+        height: 135px;
+        border-radius: 100%;
+        position: absolute;
+        left: 0px;
+        top: -10px;
+        /* padding:0.8rem; */
+        font-size: 5rem;
+        animation: alertan 0.3s linear infinite alternate;
+    }
+ @keyframes alertan{
+  from{
+    transform: scale(0.9);
+  }
+  to{
+    transform: scale(1);
+  }
+ }   
+ @keyframes play {
+
+    0% {
+      transform: scale(1);
+    }
+    15% {
+      box-shadow: 0 0 0 5px rgba(255, 0, 0, 0.4);
+    }
+    25% {
+      box-shadow: 0 0 0 10px rgba(255, 0, 0, 0.4), 0 0 0 20px rgba(255, 0, 0, 0.2);
+    }
+    25% {
+      box-shadow: 0 0 0 15px rgba(255, 255, 255, 0.4), 0 0 0 30px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+      box-shadow: 0 0 0 25px rgba(255, 255, 255, 0.4), 0 0 0 50px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 25px rgba(255, 255, 255, 0.4), 0 0 0 50px rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+      opacity: 0;
+    }
+
+  }
+
+.alertcompx{
+    margin-top: 10rem;
+}
+
+.modal-window {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s;
+    box-shadow:
+    1.4px 0.9px 2.2px rgba(0, 0, 0, 0.014),
+    3.5px 2.2px 5.3px rgba(0, 0, 0, 0.027),
+    6.5px 4.1px 10px rgba(0, 0, 0, 0.041),
+    11.6px 7.4px 17.9px rgba(0, 0, 0, 0.056),
+    21.7px 13.8px 33.4px rgba(0, 0, 0, 0.077),
+    52px 33px 80px rgba(0, 0, 0, 0.12)
+  ;
+
+  
+  }
+  
+  .modal-window:target {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .modal-window > div {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+    background: #F2994A;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+  }
+  .modal-window header {
+    font-weight: bold;
+  }
+  .modal-window h1 {
+    font-size: 150%;
+    margin: 0 0 15px;
+  }
+  .modal-close {
+    color: #ffffff;
+    line-height: 50px;
+    font-size: 1.5rem;
+    position: absolute;
+    width: 50vw;
+    padding: 5px;
+    bottom: 0;
+    right: 0;
+    text-decoration: none;
+    background-color: #f50d0d;
+  }
+  .modal-accept {
+    color: #ffffff;
+    line-height: 50px;
+    font-size: 1.5rem;
+    position: absolute;
+    width: 50vw;
+    padding: 5px;
+    bottom: 0;
+    left: 0;
+    text-decoration: none;
+    background-color: #006308;
+  }
+  .containermxz {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .modal-window div:not(:last-of-type) {
+    margin-bottom: 15px;
+  }
+
+  .btnmxz {
+    background-color: white;
+    padding: 1em 1.5em;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
+  .btnmxz i {
+    padding-right: 0.3em;
+  }
