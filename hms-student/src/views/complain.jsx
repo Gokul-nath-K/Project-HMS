@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
+import { postComplains } from "../services/studentService";
 
 export default function Complain() {
   const [complains, setComplain] = useState({});
@@ -26,12 +27,12 @@ export default function Complain() {
         break;
 
       case "room":
-        setComplain({ ...complains, room: value });
+        setComplain({ ...complains, roomno: value });
 
         break;
 
       case "complain":
-        setComplain({ ...complains, complain: value });
+        setComplain({ ...complains, complaint: value });
 
         break;
 
@@ -55,11 +56,11 @@ export default function Complain() {
       errors.block = "Please select block";
     }
 
-    if (!value.room) {
+    if (!value.roomno) {
       errors.room = "Please enter room number";
     }
 
-    if (!value.complain) {
+    if (!value.complaint) {
       errors.complain = "Please leave us complain message";
     }
 
@@ -73,10 +74,16 @@ export default function Complain() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // console.log(complains);
     if (Object.keys(error).length === 0) {
-      console.log(complains);
+      try {
+        postComplains(complains).then();
+      } catch (err) {
+        console.log(`Error: ${err.message}`);
+      }
     } else {
       console.log("enter valid form details");
+      alert("enter all required details")
     }
   };
 

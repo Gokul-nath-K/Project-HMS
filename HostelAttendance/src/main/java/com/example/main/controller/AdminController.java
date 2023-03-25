@@ -5,23 +5,31 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.main.model.AdminDashboard;
+import com.example.main.model.Complaint;
 import com.example.main.model.AdminUsers;
+import com.example.main.model.Announcement;
+import com.example.main.model.Outpass;
 import com.example.main.service.AdminService;
+import com.example.main.model.SOSTable;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/admin")
 public class AdminController {
 	
@@ -61,19 +69,92 @@ public class AdminController {
 	@Operation(summary = "Get a Admin with admincode")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Admin successfully"),
 	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
-	@GetMapping(produces = "application/json",value = "/get/id={id}")
+	@GetMapping(produces = "application/json",value = "/get/{id}")
 	public Optional<AdminDashboard> getbyId(@PathVariable String id){
 		
 		return service.getById(id);
 	}
 	
-	@Operation(summary = "Get all the Admins")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Admins successfully"),
+	@Operation(summary = "Get all the pending outpasses")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting pending outpass successfully"),
 	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/getall")
-	public List<AdminDashboard> readAll(){
+	@GetMapping(produces = "application/json",value = "/getallpendingoutpass")
+	public List<Outpass> getAllPendingOutpass(@RequestParam String status){
 		
-		return service.readAll();
+		return service.getAllPendingOutpass(status);
+	}
+	
+	@Operation(summary = "Get all the outpasses")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting outpass history successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/getalloutpass")
+	public List<Outpass> getAllOutpass(@RequestParam String status){
+		
+		return service.getAllOutpass(status);
+	}
+	
+	@Operation(summary = "update outpass status")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "outpass status updated successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/updateoutpass")
+	public String updateOutpass(@RequestParam String status, @RequestParam int id){
+		
+		return service.updateOutpass(status, id) + " one record updated";
+	}
+
+	@Operation(summary = "Get the Outpass Requests in sorted manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are sorted successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyoutdate")
+	public List<Outpass> sortbyoutdate(){
+		
+		return service.sortbyoutdate();
+	}
+	
+	@Operation(summary = "Get the Complaints in sorted manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyfield/{field}/{ch}")
+	public List<Complaint> sortbyfield(@PathVariable String field,@PathVariable int ch){
+		
+		return service.sortbyfield(field,ch);
+	}
+
+	@Operation(summary = "Get the Complaints in sortByGroup manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted by group successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sortbyfield/{field1}/{field2}/{ch}")
+	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
+		
+		return service.sortbygroup(field1,field2,ch);
+	}
+
+	@Operation(summary = "Gets all the SOS Requests")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/sosrequest")
+	public List<SOSTable> sosrequest(){
+		
+		return service.sosrequest();
+	}
+	
+	@Operation(summary = "Reviews the SOS Request")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are approved/inprogress"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/sosrequest")
+	public void sosapproval(@RequestBody SOSTable S){
+		
+		service.sosapproval(S);
+	}
+
+	@Operation(summary = "Creates a Circular/Announcement to the Students")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Circular/Announcement created successfully"),
+			     @ApiResponse(responseCode = "400",description = "Entriels are invalid")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/announcement")
+	public void announcement(@RequestBody Announcement A) {
+		
+		service.announcement(A);
 	}
 
 }

@@ -1,16 +1,25 @@
 package com.example.main.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.main.model.Announcement;
 import com.example.main.model.Complaint;
+import com.example.main.model.Outpass;
+import com.example.main.model.SOSTable;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
+import com.example.main.repository.AnnouncementRepo;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.DashboardRepo;
+import com.example.main.repository.OutpassRepo;
+import com.example.main.repository.SOSRepo;
 import com.example.main.repository.StudentLoginRepo;
 
 @Service
@@ -22,6 +31,12 @@ public class StudentService {
 	DashboardRepo profile;
 	@Autowired
 	ComplaintRepo complaint;
+	@Autowired
+	SOSRepo sos;
+	@Autowired
+	OutpassRepo outpass;
+	@Autowired
+	AnnouncementRepo announcement;
 	
 	
 	public void post(StudentUsers S) {
@@ -79,6 +94,35 @@ public class StudentService {
 		else {
 			return complaint.findAll(Sort.by(field).descending());
 		}
+	}
+
+	public List<Complaint> sortbygroup(String field1,String field2,int ch){
+		
+		Sort Field1 = Sort.by(field1);
+		Sort Field2 = Sort.by(field2);
+		if(ch == 0) {
+			return complaint.findAll(Field1.and(Field2));
+		}
+		else {
+			return complaint.findAll(Field1.and(Field2).descending());
+		}
+	}
+
+	public void postSOS(SOSTable S) {
+
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date datetime = new Date();
+		S.setDatetime(dateFormatter.format(datetime));
+		sos.save(S);
+	}
+
+	public void postOutpass(Outpass O){
+		outpass.save(O);
+	}
+
+	public List<Announcement> announcement(){
+		
+		return announcement.findAll(Sort.by("date").and(Sort.by("time")).descending());
 	}
 
 }

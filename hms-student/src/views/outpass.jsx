@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Sidebar from "../components/sidebar";
+import { postOutpass } from "../services/studentService";
 
 export default function Outpass() {
-  const [outpass, setOutpass] = useState({});
+  const [outpass, setOutpass] = useState({name:"", rollno:"", block:'', roomno:'', outdt:'', indt:'', reason:'', status:'pending'});
   const [error, setError] = useState({});
 
   const handleChange = (e) => {
@@ -26,17 +27,22 @@ export default function Outpass() {
         break;
 
       case "room":
-        setOutpass({ ...outpass, room: value });
+        setOutpass({ ...outpass, roomno: value });
 
         break;
 
       case "dateout":
-        setOutpass({ ...outpass, dateout: value });
+        setOutpass({ ...outpass, outdt: value });
 
         break;
 
       case "datein":
-        setOutpass({ ...outpass, datein: value });
+        setOutpass({ ...outpass, indt: value });
+
+        break;
+      
+      case "reason":
+          setOutpass({ ...outpass, reason: value });
 
         break;
 
@@ -60,8 +66,12 @@ export default function Outpass() {
       errors.block = "Please select block";
     }
 
-    if (!value.room) {
+    if (!value.roomno) {
       errors.room = "Please enter room number";
+    }
+    
+    if (!value.reason) {
+      errors.reason = "Please enter room number";
     }
 
     return errors;
@@ -74,8 +84,9 @@ export default function Outpass() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    console.log(outpass);
     if (Object.keys(error).length === 0) {
-      console.log(outpass);
+      postOutpass(outpass).then();
     } else {
       console.log("enter valid form details");
     }
@@ -116,6 +127,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
+                                justifyContent: "flex-end"
                               }}
                             >
                               {error.name}
@@ -140,6 +152,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
+                                justifyContent: "flex-end"
                               }}
                             >
                               {error.rollno}
@@ -155,7 +168,7 @@ export default function Outpass() {
                               name="block"
                               className="form-control"
                               onChange={handleChange}
-                              value={outpass.block}
+                              // value={outpass.block}
                               defaultValue="--Select Your Block--"
                             >
                               <option value="--Select Your Block--" disabled>
@@ -187,6 +200,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
+                                justifyContent: "flex-end"
                               }}
                             >
                               {error.room}
@@ -218,6 +232,33 @@ export default function Outpass() {
                           </div>
                         </div>
                       </div>
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="form-group">
+                            <label>Reason</label>
+                            <textarea
+                              onChange={handleChange}
+                              name="reason"
+                              className="form-control"
+                              placeholder="Write your message here."
+                              rows="4"
+                            ></textarea>
+                            <span
+                              style={{
+                                color: "red",
+                                fontSize: "small",
+                                textAlign: "start",
+                                display: "flex",
+                                padding: 4,
+                                paddingLeft: 10,
+                                justifyContent: "flex-end"
+                              }}
+                            >
+                              {error.reason}
+                            </span>
+                          </div>
+                        </div>
+                        </div>
                       <div className="row">
                         <div className="col-md-12">
                           <button

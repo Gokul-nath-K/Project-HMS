@@ -1,10 +1,11 @@
 package com.example.main.controller;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.main.model.Announcement;
 import com.example.main.model.Complaint;
+import com.example.main.model.Outpass;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.service.StudentService;
+import com.example.main.model.SOSTable;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -24,6 +28,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/students")
 public class StudentController {
 	
@@ -63,8 +68,8 @@ public class StudentController {
 	@Operation(summary = "Get a Student with rollno")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Student successfully"),
 	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
-	@GetMapping(produces = "application/json",value = "/get/id={id}")
-	public Optional<StudentDashboard> getbyId(@PathVariable String id){
+	@GetMapping(produces = "application/json",value = "/get/{id}")
+	public Optional<StudentDashboard> getbyId(@PathVariable("id") String id){
 		
 		return service.getById(id);
 	}
@@ -87,13 +92,32 @@ public class StudentController {
 		service.postComplaint(C);
 	}
 
-	@Operation(summary = "Get the Complaints in sorted manner")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
-	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/sortbyfield/{field}/{ch}")
-	public List<Complaint> sortbyfield(@PathVariable String field,@PathVariable int ch){
+	@Operation(summary = "Gets Outpass Request from a Student")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Request received successfully"),
+			     @ApiResponse(responseCode = "400",description = "NIL")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/outpass")
+	public void postOutpass(@RequestBody Outpass O) {
+		service.postOutpass(O);
+	}
+	
+
+	@Operation(summary = "Gets a SOS Message from a Student")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "SOS Message received successfully"),
+			     @ApiResponse(responseCode = "400",description = "NIL")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/SOS")
+	public void postSOS(@RequestBody SOSTable S) {
+		service.postSOS(S);
+	}
+
+	@Operation(summary = "Displays the Circular/Announcement to the Students")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Announcement/Circular successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Circular/Announcement")})
+	@GetMapping(produces = "application/json",value = "/announcement")
+	public List<Announcement> announcement(){
 		
-		return service.sortbyfield(field,ch);
+		return service.announcement();
 	}
 
 }

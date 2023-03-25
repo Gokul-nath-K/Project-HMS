@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import Sidebar from '../components/sidebar';
 import { userContext } from '../Data/userContext';
 
+
 export default function Profile() {
 
-    const { user } = useContext(userContext);
+    const { student } = useContext(userContext);
 
     return (
         <>
@@ -22,7 +23,7 @@ export default function Profile() {
                             <div className="col-auto my-auto">
                                 <div className="h-100">
                                     <h5 className="mb-1">
-                                        {user.rollno}
+                                        {localStorage.getItem('rollno')}
                                     </h5>
                                     <p className="mb-0 font-weight-bold text-sm">
                                         Hostler
@@ -72,43 +73,43 @@ export default function Profile() {
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Name of the student</label>
-                                                <input className="form-control" type="text" value="muthu.pandi" />
+                                                <input className="form-control" type="text" value={!student ? "Name" : student.name} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Date of birth</label>
-                                                <input className="form-control" type="text" value="dd/MM/yyyy" />
+                                                <input className="form-control" type="text" value={!student ? "dd/MM/yyyy" : student.dob} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Year</label>
-                                                <input className="form-control" type="text" value="2nd year" />
+                                                <input className="form-control" type="text" value={!student ? "Year" : student.year} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Departent</label>
-                                                <input className="form-control" type="text" value="Mechanical engineering" />
+                                                <input className="form-control" type="text" value={!student ? "Department" : student.dept} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Block</label>
-                                                <input className="form-control" type="text" value="Block-A" />
+                                                <input className="form-control" type="text" value={!student ? "Block" : student.block} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Room no.</label>
-                                                <input className="form-control" type="text" value="105" />
+                                                <input className="form-control" type="text" value={!student ? "Room no." : student.roomno} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Blood group</label>
-                                                <input className="form-control" type="text" value="O +ev" />
+                                                <input className="form-control" type="text" value={!student ? "Blood group" : student.bloodgroup} />
                                             </div>
                                         </div>
                                     </div>
@@ -118,23 +119,23 @@ export default function Profile() {
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Parent / guardian Ph-no.</label>
-                                                <input className="form-control" type="text" value={6876357869} />
+                                                <input className="form-control" type="text" value={!student ? "Parents / gaurdian phno." : student.guardian_phone} />
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Phone number</label>
-                                                <input className="form-control" type="text" value="9876541320" />
+                                                <input className="form-control" type="text" value={!student ? "Personal phno." : student.personal_phone} />
                                             </div>
                                         </div>
                                         <div className="col-md-12">
                                             <div className="form-group">
                                                 <label htmlFor="example-text-input" className="form-control-label">Email address</label>
-                                                <input className="form-control" type="email" value="muthu.pandi@example.com" />
+                                                <input className="form-control" type="email" value={!student ? "Email address" : student.email} />
                                             </div>
                                         </div>
                                     </div>
-                                    <hr className="horizontal dark" />
+                                    {/* <hr className="horizontal dark" />
                                     <p className="text-uppercase text-sm">About me</p>
                                     <div className="row">
                                         <div className="col-md-12">
@@ -143,7 +144,7 @@ export default function Profile() {
                                                 <input className="form-control" type="text" defaultValue="Athala nee yean kekura, yean kekura, nee keka kudathu 🤨" />
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
