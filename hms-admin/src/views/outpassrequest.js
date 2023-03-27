@@ -1,29 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { getPendingOutpasses, updateOutpasses } from '../service/attendanceService'
-import { useNavigate } from "react-router-dom";
+import { getPendingOutpasses, updateOutpass } from '../service/attendanceService'
 
 function ListOutpassRequestComponent() {
-    // const navigate = useNavigate();
-    const [outpasses, setOutpasses] = useState([]);
+
+    const [outpassReqs, setOutpassReqs] = useState([]);
     
-    function Updateoutpass( status, id ) {
-        try{
-            updateOutpasses( status, id ).then((res) => { console.log( res ); });
-            
-            // navigate('/');
-        }
-        catch(err){
-            console.log(`ERROR: ${err.message}`);
-        }   
-        console.log('hl')
-        // window.location.reload(false);
-        
+
+    function Allowoutpass( id ) {
+        updateOutpass( id, "Allowed" ).then((res) => { console.log( res.data ); });  
     }
+
+    function Denyoutpass( id ) {
+      updateOutpass( id, "Denied" ).then((res) => { console.log( res.data ); });  
+  }
 
     useEffect(() => {
           try {
             getPendingOutpasses("pending").then((res) => { 
-                setOutpasses(res.data);
+                setOutpassReqs(res.data);
             })
           }
           catch(err) {
@@ -48,7 +42,7 @@ function ListOutpassRequestComponent() {
             </tr>
           </thead>
           <tbody style={{ textAlign: "center", color: "black" }}>
-            { outpasses && outpasses.map((outpass) => {
+            { outpassReqs && outpassReqs.map((outpass) => {
                 return(
                 <tr key={outpass.id}>
                   <td> {outpass.name}</td>
@@ -59,8 +53,9 @@ function ListOutpassRequestComponent() {
                   <td> {outpass.indt}</td>
                   <td> {outpass.reason}</td>
                   <td>
-                    <button type="button" class="btn btn-success mx-2 btn-sm" onClick={Updateoutpass("Allowed",outpass.id)}>Allow</button>
-                    <button type="button" class="btn btn-danger btn-sm" onClick={Updateoutpass("Denied",outpass.id)}>Deny</button>
+                    <button type="button" className="btn btn-success mx-2 btn-sm" onClick={Allowoutpass(outpass.id)}>Allow</button>
+                    <button type="button" className="btn btn-danger btn-sm" onClick={Denyoutpass(outpass.id)}>Deny</button>
+                    {/* <input type="radio"/> */}
                   </td>
                 </tr>
                 )
