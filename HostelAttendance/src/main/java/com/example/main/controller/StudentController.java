@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.main.model.AdminDashboard;
 import com.example.main.model.Announcement;
 import com.example.main.model.Complaint;
 import com.example.main.model.Outpass;
@@ -118,6 +119,15 @@ public class StudentController {
 	public List<Announcement> announcement(){
 		
 		return service.announcement();
+	}
+
+	@Operation(summary = "Displays Admin Record for a Student")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Admin Record successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/getadmin/{id}")
+	public List<AdminDashboard> getAdmin(@PathVariable String rollno){
+		
+		return service.getAdmin(rollno);
 	}
 
 }

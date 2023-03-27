@@ -9,12 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.example.main.model.AdminDashboard;
 import com.example.main.model.Announcement;
 import com.example.main.model.Complaint;
 import com.example.main.model.Outpass;
 import com.example.main.model.SOSTable;
 import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
+import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AnnouncementRepo;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.DashboardRepo;
@@ -37,6 +39,8 @@ public class StudentService {
 	OutpassRepo outpass;
 	@Autowired
 	AnnouncementRepo announcement;
+	@Autowired
+	AdminDashboardRepo admin;
 	
 	
 	public void post(StudentUsers S) {
@@ -123,6 +127,12 @@ public class StudentService {
 	public List<Announcement> announcement(){
 		
 		return announcement.findAll(Sort.by("date").and(Sort.by("time")).descending());
+	}
+
+	public List<AdminDashboard> getAdmin(String rollno){
+		
+		StudentDashboard s = profile.getById(rollno);
+		return admin.getadmin(s.getBlock());
 	}
 
 }
