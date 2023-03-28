@@ -12,13 +12,17 @@ import org.springframework.stereotype.Service;
 import com.example.main.model.AdminDashboard;
 import com.example.main.model.AdminUsers;
 import com.example.main.model.Announcement;
+import com.example.main.model.Attendance;
 import com.example.main.model.Outpass;
 import com.example.main.model.SOSTable;
+import com.example.main.model.StudentDashboard;
 import com.example.main.model.Complaint;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AdminUsersRepo;
 import com.example.main.repository.AnnouncementRepo;
+import com.example.main.repository.AttendanceRepo;
 import com.example.main.repository.ComplaintRepo;
+import com.example.main.repository.DashboardRepo;
 import com.example.main.repository.OutpassRepo;
 import com.example.main.repository.SOSRepo;
 
@@ -32,6 +36,8 @@ public class AdminService {
 	@Autowired
 	AdminDashboardRepo profile;
 	@Autowired
+	DashboardRepo student;
+	@Autowired
 	ComplaintRepo complaint;
 	@Autowired
 	OutpassRepo outpass;
@@ -39,6 +45,8 @@ public class AdminService {
 	SOSRepo sos;
 	@Autowired
 	AnnouncementRepo announcement;
+	@Autowired
+	AttendanceRepo attendance;
 	
 	public void post(AdminUsers A) {
 		login.save(A);
@@ -85,7 +93,7 @@ public class AdminService {
 		
 //		return op.updateOutpass(status, id);
 		
-		Outpass updateOutpass = op.findById(id).get();
+		Outpass updateOutpass = outpass.findById(id).get();
 		
 		if(updateOutpass == null)
 		{
@@ -95,7 +103,7 @@ public class AdminService {
 		else
 		{
 			updateOutpass.setStatus(status);
-			op.save(updateOutpass);
+			outpass.save(updateOutpass);
 			return "Updated";
 		}
 		
@@ -144,6 +152,20 @@ public class AdminService {
 		A.setDate(dateFormatter.format(date));
 		A.setTime(timeFormatter.format(time));
 		announcement.save(A);
+	}
+
+	public void postattendance(Attendance A) {
+		
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+		Date date = new Date();
+		A.setDate(dateFormatter.format(date));
+		attendance.save(A);
+	}
+	
+	public List<StudentDashboard> getattendance(String admincode){
+		
+		AdminDashboard A = profile.getById(admincode);
+		return student.findByblock(A.getBlock());
 	}
 	
 }
