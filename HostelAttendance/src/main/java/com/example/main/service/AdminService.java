@@ -81,10 +81,23 @@ public class AdminService {
 		return outpass.getAllOutpass(status);	
 	}
 	@Transactional
-	public Integer updateOutpass(String status, int id){
+	public String updateOutpass(String status, int id){
 		
-		return outpass.updateOutpass(status, id);
+//		return op.updateOutpass(status, id);
 		
+		Outpass updateOutpass = op.findById(id).get();
+		
+		if(updateOutpass == null)
+		{
+			return "No updates";
+		}
+		
+		else
+		{
+			updateOutpass.setStatus(status);
+			op.save(updateOutpass);
+			return "Updated";
+		}
 		
 	}
 
