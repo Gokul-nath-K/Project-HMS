@@ -19,3 +19,8 @@ export const postOutpass = (outpass) => {
 
     return axios.post(`http://localhost:8080/api/students/outpass`, outpass)
 }
+
+export const getAnnouncement = () => {
+
+    return axios.get(`http://localhost:8080/api/students/announcement`)
+}
