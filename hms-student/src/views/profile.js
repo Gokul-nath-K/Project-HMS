@@ -1,11 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Sidebar from '../components/sidebar';
 import { userContext } from '../Data/userContext';
+import { getStudent } from '../services/studentService';
 
 
 export default function Profile() {
 
-    const { student } = useContext(userContext);
+    const rollno = localStorage.getItem('rollno');
+    const { student, setStudent } = useContext(userContext);
+
+    useEffect(() => {
+
+        try {
+          getStudent(rollno).then((res) => {
+                setStudent(res.data);
+          })
+        }
+        catch (err) {
+          console.log(`Error: ${err.message}`);
+        }
+      }, [rollno]);
 
     return (
         <>
