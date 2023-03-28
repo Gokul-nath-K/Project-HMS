@@ -166,13 +166,8 @@ public class AdminService {
 		announcement.save(A);
 	}
 
-<<<<<<< HEAD
 	public void postattendance(Attendance A[]) {
 		
-=======
-	public void postattendance(Attendance A) {
-
->>>>>>> f6a95c70c6e719ed4b2d25ed3847ba47de493237
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 
