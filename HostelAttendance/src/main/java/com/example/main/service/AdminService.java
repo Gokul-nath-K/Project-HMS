@@ -1,6 +1,6 @@
 package com.example.main.service;
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat; 
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -88,6 +88,7 @@ public class AdminService {
 	public List<Outpass> getAllOutpass(String status) {
 		return outpass.getAllOutpass(status);	
 	}
+	
 	@Transactional
 	public String updateOutpass(String status, int id){
 		
