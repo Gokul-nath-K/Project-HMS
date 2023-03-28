@@ -117,6 +117,7 @@ export default function Login() {
     
         Notification.requestPermission().then(perm => {
           if (perm === 'granted') {
+
             const notification = new Notification('Alert SOS Emergency')
     
             clearInterval(timer);
