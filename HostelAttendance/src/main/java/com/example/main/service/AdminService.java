@@ -167,5 +167,12 @@ public class AdminService {
 		AdminDashboard A = profile.getById(admincode);
 		return student.findByblock(A.getBlock());
 	}
+
+	public List<Attendance> attendanceHistory(String date,String admincode){
+		
+		AdminDashboard A = profile.getById(admincode);
+		return attendance.findByDate(A.getBlock(),date);
+
+	}
 	
 }

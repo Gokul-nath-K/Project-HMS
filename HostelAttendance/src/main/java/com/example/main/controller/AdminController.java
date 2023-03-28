@@ -177,4 +177,13 @@ public class AdminController {
 		return service.getattendance(id);
 	}
 
+	@Operation(summary = "Gets all the Students for History of Attendance")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Credentials are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid Date")})
+	@GetMapping(produces = "application/json",value = "/history/{date}/{id}")
+	public List<Attendance> attendanceHistory(@PathVariable String date ,@PathVariable String id){
+		
+		return service.attendanceHistory(date,id);
+	}
+
 }
