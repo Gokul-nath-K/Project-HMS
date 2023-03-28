@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../App.css';
-import { getSOS, loginUser } from '../service/attendanceService';
+import { userContext } from '../Data/userContext';
+import { getAdmin, getSOS, loginUser } from '../service/attendanceService';
 export default function Login() {
 
     const [user, setUser] = useState({});
+    const { admin, setAdmin } = useContext(userContext);
+
 
     const [error, setError] = useState({});
     const navigate = useNavigate();
@@ -77,11 +80,25 @@ export default function Login() {
 
                 loginUser(user).then((res) => {
 
+
                     if (res.data) {
 
-                        localStorage.setItem("admincode", user.admincode);
-                        localStorage.setItem("email", user.email);
-                        localStorage.setItem("password", user.password);
+                        try {
+                            getAdmin(user.admincode).then((res) => {
+                                console.log(res.data);
+                                setAdmin(res.data);
+                            }).then(() => {
+
+                                localStorage.setItem("admincode", user.admincode);
+                                localStorage.setItem("email", user.email);
+                                localStorage.setItem("password", user.password);
+                                localStorage.setItem("block", admin.block);
+                            });
+                        }
+                        catch (err) {
+                            console.log(`Error: ${err.message}`);
+                        }
+
 
                         navigate('/dashboard')
                         chechSOS();
@@ -101,30 +118,30 @@ export default function Login() {
     function chechSOS() {
 
         const timer = setInterval(function () {
-    
-          getSOS().then(res => {
-    
-            if(res.data[0].isactive === false) {
-    
-              sendPushNotification(timer);
-            }
-          });
-          
-        }, 3000)
-      }
-    
-      function sendPushNotification(timer) {
-    
-        Notification.requestPermission().then(perm => {
-          if (perm === 'granted') {
 
-            const notification = new Notification('Alert SOS Emergency')
-    
-            clearInterval(timer);
-    
-          }
+            getSOS().then(res => {
+
+                if (res.data[0].isactive === false) {
+
+                    sendPushNotification(timer);
+                }
+            });
+
+        }, 3000)
+    }
+
+    function sendPushNotification(timer) {
+
+        Notification.requestPermission().then(perm => {
+            if (perm === 'granted') {
+
+                const notification = new Notification('Alert SOS Emergency')
+
+                clearInterval(timer);
+
+            }
         })
-      }
+    }
 
 
     return (
