@@ -20,9 +20,11 @@ import com.example.main.model.AdminDashboard;
 import com.example.main.model.Complaint;
 import com.example.main.model.AdminUsers;
 import com.example.main.model.Announcement;
+import com.example.main.model.Attendance;
 import com.example.main.model.Outpass;
 import com.example.main.service.AdminService;
 import com.example.main.model.SOSTable;
+import com.example.main.model.StudentDashboard;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -155,6 +157,24 @@ public class AdminController {
 	public void announcement(@RequestBody Announcement A) {
 		
 		service.announcement(A);
+	}
+
+	@Operation(summary = "Creates a new record of Attendance")
+	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Attendance created successfully"),
+			     @ApiResponse(responseCode = "400",description = "Credentials are invalid")})
+	@ResponseStatus(HttpStatus.CREATED)
+	@PostMapping(consumes = "application/json",value = "/postattendance")
+	public void postattendance(@RequestBody Attendance A) {
+		service.postattendance(A);
+	}
+	
+	@Operation(summary = "Gets all the Students for marking Attendance")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Credentials are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@GetMapping(produces = "application/json",value = "/getattendance/{id}")
+	public List<StudentDashboard> getattendance(@PathVariable String id){
+		
+		return service.getattendance(id);
 	}
 
 }
