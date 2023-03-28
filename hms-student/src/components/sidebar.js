@@ -64,7 +64,7 @@ export default function Sidebar() {
                             </div>
                         </div>
                     </div> */}
-                    <button onClick={handleLogout} className="btn btn-danger btn-sm w-50 mb-3">Logout</button>
+                    <button onClick={handleLogout()} className="btn btn-danger btn-sm w-50 mb-3">Logout</button>
                 </div>
             </aside>
 
