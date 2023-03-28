@@ -113,22 +113,22 @@ public class AdminController {
 		return service.sortbyoutdate();
 	}
 	
-	@Operation(summary = "Get the Complaints in sorted manner")
+	@Operation(summary = "Get the Pending Complaints in sorted manner")
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
 	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/sortbyfield/{field}/{ch}")
-	public List<Complaint> sortbyfield(@PathVariable String field,@PathVariable int ch){
+	@GetMapping(produces = "application/json",value = "/sortbypending/{block}")
+	public List<Complaint> sortbypending(@PathVariable String block){
 		
-		return service.sortbyfield(field,ch);
+		return service.sortbypending(block);
 	}
 
-	@Operation(summary = "Get the Complaints in sortByGroup manner")
-	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted by group successfully"),
+	@Operation(summary = "Get the Viewed Complaints in sorted manner")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Complaints are sorted successfully"),
 	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
-	@GetMapping(produces = "application/json",value = "/sortbyfield/{field1}/{field2}/{ch}")
-	public List<Complaint> sortbygroup(@PathVariable String field1,@PathVariable String field2,@PathVariable int ch){
+	@GetMapping(produces = "application/json",value = "/sortbyview/{block}")
+	public List<Complaint> sortbyview(@PathVariable String block){
 		
-		return service.sortbygroup(field1,field2,ch);
+		return service.sortbyview(block);
 	}
 
 	@Operation(summary = "Gets all the SOS Requests")
@@ -147,6 +147,15 @@ public class AdminController {
 	public void sosapproval(@RequestBody SOSTable S){
 		
 		service.sosapproval(S);
+	}
+
+	@Operation(summary = "Reviews the Complaints Request")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are approved/pending"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/complaint")
+	public void complaintapproval(@RequestBody Complaint C){
+		
+		service.complaintapproval(C);
 	}
 
 	@Operation(summary = "Creates a Circular/Announcement to the Students")
@@ -184,6 +193,42 @@ public class AdminController {
 	public List<Attendance> attendanceHistory(@PathVariable String date ,@PathVariable String id){
 		
 		return service.attendanceHistory(date,id);
+	}
+
+	@Operation(summary = "Gets the count of Students")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Credentials are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid")})
+	@GetMapping(produces = "application/json",value = "/studentscount/{admincode}")
+	public List<Integer> studentsCount(@PathVariable String admincode){
+		
+		return service.studentsCount(admincode);
+	}
+	
+	@Operation(summary = "Gets the count of Complaints")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Credentials are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid")})
+	@GetMapping(produces = "application/json",value = "/complaintscount/{admincode}")
+	public List<Integer> complaintsCount(@PathVariable String admincode){
+		
+		return service.complaintsCount(admincode);
+	}
+	
+	@Operation(summary = "Gets the count of SOS Requests")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Credentials are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid")})
+	@GetMapping(produces = "application/json",value = "/soscount/{admincode}")
+	public List<Integer> sosCount(@PathVariable String admincode){
+		
+		return service.sosCount(admincode);
+	}
+	
+	@Operation(summary = "Gets the count of Outpass")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Credentials are displayed successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid")})
+	@GetMapping(produces = "application/json",value = "/outpasscount/{admincode}")
+	public List<Integer> outpassCount(@PathVariable String admincode){
+		
+		return service.outpassCount(admincode);
 	}
 
 }
