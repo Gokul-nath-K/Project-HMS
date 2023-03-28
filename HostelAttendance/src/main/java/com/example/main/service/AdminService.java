@@ -1,6 +1,8 @@
 package com.example.main.service;
 
-import java.text.SimpleDateFormat; 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -47,67 +49,62 @@ public class AdminService {
 	AnnouncementRepo announcement;
 	@Autowired
 	AttendanceRepo attendance;
-	
+
 	public void post(AdminUsers A) {
 		login.save(A);
 	}
-	
+
 	public boolean logincheck(AdminUsers A) {
-		
-		if(login.existsById(A.getAdmincode())) {
+
+		if (login.existsById(A.getAdmincode())) {
 			AdminUsers exists = login.getById(A.getAdmincode());
-			if(exists.getEmail().equals(A.getEmail())) {
-				if(exists.getPassword().equals(A.getPassword())) {
+			if (exists.getEmail().equals(A.getEmail())) {
+				if (exists.getPassword().equals(A.getPassword())) {
 					return true;
-				}
-				else {
+				} else {
 					return false;
 				}
-			}
-			else {
+			} else {
 				return false;
 			}
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public void create(AdminDashboard A) {
 		profile.save(A);
 	}
-	
-	public Optional<AdminDashboard> getById(String admincode){
+
+	public Optional<AdminDashboard> getById(String admincode) {
 		return profile.findById(admincode);
 	}
 
 	public List<Outpass> getAllPendingOutpass(String status) {
-		return outpass.getAllPendingOutpass(status);	
+		return outpass.getAllPendingOutpass(status);
 	}
-	
+
 	public List<Outpass> getAllOutpass(String status) {
-		return outpass.getAllOutpass(status);	
+		return outpass.getAllOutpass(status);
 	}
-	
+
 	@Transactional
-	public String updateOutpass(String status, int id){
-		
-//		return op.updateOutpass(status, id);
-		
+	public String updateOutpass(String status, int id) {
+
+		// return op.updateOutpass(status, id);
+
 		Outpass updateOutpass = outpass.findById(id).get();
-		
-		if(updateOutpass == null)
-		{
+
+		if (updateOutpass == null) {
 			return "No updates";
 		}
-		
-		else
-		{
+
+		else {
 			updateOutpass.setStatus(status);
 			outpass.save(updateOutpass);
 			return "Updated";
 		}
-		
+
 	}
 
 	public List<Outpass> sortbyoutdate() {
@@ -115,23 +112,32 @@ public class AdminService {
 		return outpass.findAll(Sort.by("outdt"));
 	}
 
-	public List<Complaint> sortbyfield(String field, int ch) {
-		if (ch == 0) {
-			return complaint.findAll(Sort.by(field));
-		} else {
-			return complaint.findAll(Sort.by(field).descending());
+	public List<Complaint> sortbypending(String block) {
+
+		List<Complaint> list = complaint.findAll(Sort.by("date").and(Sort.by("time")));
+		List<Complaint> sortedList = new ArrayList<>();
+		for (Complaint C : list) {
+			if(C.getBlock().equals(block) && C.getStatus().equals("pending")){
+				sortedList.add(C);
+			}
 		}
+
+		return sortedList;
+
 	}
 
-	public List<Complaint> sortbygroup(String field1, String field2, int ch) {
+	public List<Complaint> sortbyview(String block) {
 
-		Sort Field1 = Sort.by(field1);
-		Sort Field2 = Sort.by(field2);
-		if (ch == 0) {
-			return complaint.findAll(Field1.and(Field2));
-		} else {
-			return complaint.findAll(Field1.and(Field2).descending());
+		List<Complaint> list = complaint.findAll(Sort.by("date").and(Sort.by("time")).descending());
+
+		List<Complaint> sortedList = new ArrayList<>();
+		for (Complaint C : list) {
+			if(C.getBlock().equals(block) && C.getStatus().equals("allowed")){
+				sortedList.add(C);
+			}
 		}
+
+		return sortedList;
 	}
 
 	public List<SOSTable> sosrequest() {
@@ -140,12 +146,17 @@ public class AdminService {
 	}
 
 	public void sosapproval(SOSTable S) {
-		
+
 		sos.sosapproval(S.getRollno());
 	}
 
+	public void complaintapproval(Complaint C) {
+
+		complaint.complaintapproval(C.getRollno());
+	}
+
 	public void announcement(Announcement A) {
-		
+
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = new Date();
 		SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm aa");
@@ -155,8 +166,13 @@ public class AdminService {
 		announcement.save(A);
 	}
 
+<<<<<<< HEAD
 	public void postattendance(Attendance A[]) {
 		
+=======
+	public void postattendance(Attendance A) {
+
+>>>>>>> f6a95c70c6e719ed4b2d25ed3847ba47de493237
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 
@@ -166,18 +182,42 @@ public class AdminService {
 			attendance.save(a	);
 		}
 	}
-	
-	public List<StudentDashboard> getattendance(String admincode){
-		
+
+	public List<StudentDashboard> getattendance(String admincode) {
+
 		AdminDashboard A = profile.getById(admincode);
 		return student.findByblock(A.getBlock());
 	}
 
-	public List<Attendance> attendanceHistory(String date,String admincode){
-		
+	public List<Attendance> attendanceHistory(String date, String admincode) {
+
 		AdminDashboard A = profile.getById(admincode);
-		return attendance.findByDate(A.getBlock(),date);
+		return attendance.findByDate(A.getBlock(), date);
 
 	}
-	
+
+	public List<Integer> studentsCount(String admincode) {
+
+		AdminDashboard A = profile.getById(admincode);
+		return student.studentCount(A.getBlock());
+	}
+
+	public List<Integer> complaintsCount(String admincode) {
+
+		AdminDashboard A = profile.getById(admincode);
+		return complaint.complaintsCount(A.getBlock());
+	}
+
+	public List<Integer> sosCount(String admincode) {
+
+		AdminDashboard A = profile.getById(admincode);
+		return sos.sosCount(A.getBlock());
+	}
+
+	public List<Integer> outpassCount(String admincode) {
+
+		AdminDashboard A = profile.getById(admincode);
+		return outpass.outpassCount(A.getBlock());
+	}
+
 }
