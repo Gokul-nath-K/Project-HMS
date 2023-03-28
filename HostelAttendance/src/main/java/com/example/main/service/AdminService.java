@@ -155,12 +155,16 @@ public class AdminService {
 		announcement.save(A);
 	}
 
-	public void postattendance(Attendance A) {
+	public void postattendance(Attendance A[]) {
 		
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		A.setDate(dateFormatter.format(date));
-		attendance.save(A);
+
+		for(Attendance a : A) {
+			
+			a.setDate(dateFormatter.format(date));
+			attendance.save(a	);
+		}
 	}
 	
 	public List<StudentDashboard> getattendance(String admincode){

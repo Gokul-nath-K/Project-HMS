@@ -164,7 +164,7 @@ public class AdminController {
 			     @ApiResponse(responseCode = "400",description = "Credentials are invalid")})
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping(consumes = "application/json",value = "/postattendance")
-	public void postattendance(@RequestBody Attendance A) {
+	public void postattendance(@RequestBody Attendance A[]) {
 		service.postattendance(A);
 	}
 	
