@@ -5,19 +5,28 @@ function ListOutpassComponent() {
     
     const [outpasses, setOutpasses] = useState([]);
     
+    function fetchoutpassList() {
+      try {
+        getAllOutpasses("pending").then((res) => { 
+            setOutpasses(res.data);
+        })
+      }
+      catch(err) {
+        console.log(`ERROR: ${err.message}`);
+      }
+      
+    }
     useEffect(() => {
-          try {
-            getAllOutpasses("pending").then((res) => { 
-                setOutpasses(res.data);
-            })
-          }
-          catch(err) {
-            console.log(`ERROR: ${err.message}`);
-          }
+         fetchoutpassList();
     }, []);
     
   return (
     <div>
+      <div className="row">
+        <div className="col d-flex justify-content-end mb-3">
+         <button className="btn btn-secondary mx-3" onClick={fetchoutpassList()}> reload </button>
+        </div>
+      </div>
       <div className="row">
         <table className="table table-striped table-bordered">
           <thead style={{ textAlign: "center" }}>

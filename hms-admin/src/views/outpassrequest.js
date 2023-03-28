@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { getPendingOutpasses, updateOutpass } from '../service/attendanceService'
+import { getPendingOutpasses, updateOutpasses } from '../service/attendanceService'
 
 function ListOutpassRequestComponent() {
 
-    const [outpassReqs, setOutpassReqs] = useState([]);
-    
+  const [outpassReqs, setOutpassReqs] = useState([]);
 
-    function Allowoutpass( id ) {
-        updateOutpass( id, "Allowed" ).then((res) => { console.log( res.data ); });  
-    }
 
-    function Denyoutpass( id ) {
-      updateOutpass( id, "Denied" ).then((res) => { console.log( res.data ); });  
+  function outpassApproval(id, status) {
+    updateOutpasses(status, id).then((res) => fetchOutpassDetails());
   }
 
-    useEffect(() => {
-          try {
-            getPendingOutpasses("pending").then((res) => { 
-                setOutpassReqs(res.data);
-            })
-          }
-          catch(err) {
-            console.log(`ERROR: ${err.message}`);
-          }
-    }, []);
-    
+  function fetchOutpassDetails() {
+    try {
+      getPendingOutpasses("pending").then((res) => {
+        setOutpassReqs(res.data);
+      })
+    }
+    catch (err) {
+      console.log(`ERROR: ${err.message}`);
+    }
+  }
+  useEffect(() => {
+    fetchOutpassDetails();
+  }, []);
+
   return (
     <div>
       <div className="row">
@@ -42,8 +41,8 @@ function ListOutpassRequestComponent() {
             </tr>
           </thead>
           <tbody style={{ textAlign: "center", color: "black" }}>
-            { outpassReqs && outpassReqs.map((outpass) => {
-                return(
+            {outpassReqs && outpassReqs.map((outpass) => {
+              return (
                 <tr key={outpass.id}>
                   <td> {outpass.name}</td>
                   <td> {outpass.rollno}</td>
@@ -53,13 +52,13 @@ function ListOutpassRequestComponent() {
                   <td> {outpass.indt}</td>
                   <td> {outpass.reason}</td>
                   <td>
-                    <button type="button" className="btn btn-success mx-2 btn-sm" onClick={Allowoutpass(outpass.id)}>Allow</button>
-                    <button type="button" className="btn btn-danger btn-sm" onClick={Denyoutpass(outpass.id)}>Deny</button>
+                    <button type="button" className="btn btn-success mx-2 btn-sm" onClick={() => outpassApproval(outpass.id, "allowed")}>Allow</button>
+                    <button type="button" className="btn btn-danger btn-sm" onClick={() => outpassApproval(outpass.id, "denied")}>Deny</button>
                     {/* <input type="radio"/> */}
                   </td>
                 </tr>
-                )
-              })}
+              )
+            })}
           </tbody>
         </table>
       </div>
