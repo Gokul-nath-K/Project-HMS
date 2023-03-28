@@ -26,7 +26,22 @@ export const getAdmin = (admincode) => {
     return axios.get(ATTENDANCE_API_BASE_URL + '/get/' + admincode)
 }
 
+export const getAttendance = (admincode) => {
+
+    return axios.get(ATTENDANCE_API_BASE_URL + '/getattendance/' + admincode)
+}
+
+export const postAttendance = (attendance) => {
+
+    return axios.post(ATTENDANCE_API_BASE_URL + '/postattendance', attendance);
+}
+
 export const getSOS = () => {
 
     return axios.get(`http://localhost:8080/api/admin/sosrequest`)
+}
+
+export const getAttByDate = (date, id) => {
+
+    return axios.get(`${ATTENDANCE_API_BASE_URL}/history/` + date + `/` + id);
 }
