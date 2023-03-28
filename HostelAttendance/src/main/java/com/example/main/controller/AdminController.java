@@ -149,6 +149,15 @@ public class AdminController {
 		service.sosapproval(S);
 	}
 
+	@Operation(summary = "Reviews the Complaints Request")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are approved/pending"),
+	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
+	@PutMapping(produces = "application/json",value = "/complaint")
+	public void complaintapproval(@RequestBody Complaint C){
+		
+		service.complaintapproval(C);
+	}
+
 	@Operation(summary = "Creates a Circular/Announcement to the Students")
 	@ApiResponses(value = {@ApiResponse(responseCode = "201",description = "Circular/Announcement created successfully"),
 			     @ApiResponse(responseCode = "400",description = "Entriels are invalid")})
