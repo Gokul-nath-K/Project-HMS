@@ -144,6 +144,11 @@ public class AdminService {
 		sos.sosapproval(S.getRollno());
 	}
 
+	public void complaintapproval(Complaint C) {
+		
+		complaint.complaintapproval(C.getRollno());
+	}
+
 	public void announcement(Announcement A) {
 		
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/yyyy");
@@ -157,7 +162,7 @@ public class AdminService {
 
 	public void postattendance(Attendance A) {
 		
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
 		A.setDate(dateFormatter.format(date));
 		attendance.save(A);
