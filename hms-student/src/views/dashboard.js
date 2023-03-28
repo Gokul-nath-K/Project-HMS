@@ -1,20 +1,31 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { NoAnnouncement } from '../components/no_announcement';
 import Sidebar from '../components/sidebar';
 import Sos from '../components/sos';
-import { userContext } from '../Data/userContext';
-import { postSOS } from '../services/studentService';
+// import { userContext } from '../Data/userContext';
+import { getAnnouncement, postSOS } from '../services/studentService';
 
 export default function Dashboard() {
 
-    const { student } = useContext(userContext);
+    // const { student } = useContext(userContext);
     const [error, setError] = useState({});
+    const [announcement, setAnnouncement] = useState([]);
+
+    useEffect(() => {
+        try {
+            getAnnouncement().then((res) => { setAnnouncement(res.data); });
+        }
+        catch (err) {
+            console.log(`ERROR : ${err.message}`);
+        }
+    }, []);
+
 
     const student_name = localStorage.getItem('name');
     const student_rollno = localStorage.getItem('rollno');
 
 
-    const [sosdata, setSosData] = useState({ datetime: "", isactive: false, name: student_name, reason: "", rollno: student_rollno, reason: "", confirmMessage: "" });
-    console.log(sosdata);
+    const [sosdata, setSosData] = useState({ datetime: "", isactive: false, name: student_name, rollno: student_rollno, reason: "", confirmMessage: "" });
 
     const resetForm = () => {
         document.getElementById('form-id').reset();
@@ -28,13 +39,11 @@ export default function Dashboard() {
 
             case "reason":
                 setSosData({ ...sosdata, reason: value })
-                console.log(sosdata.reason);
 
                 break;
 
             case "confirm":
                 setSosData({ ...sosdata, confirmMessage: value })
-                console.log(sosdata.confirmInput);
 
                 break;
 
@@ -59,7 +68,7 @@ export default function Dashboard() {
 
         setError(validateForm(sosdata))
 
-    }, [sosdata.confirmMessage])
+    }, [sosdata])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -85,103 +94,59 @@ export default function Dashboard() {
                 <main className="main-content position-relative border-radius-lg ">
                     <div className="container-fluid py-4">
                         <div className="row">
-                            <div className=" col-8">
-                                <div className="row">
-                                    <div className="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-                                        <div className="card">
-                                            <div className="card-body p-3">
-                                                <div className="row">
-                                                    <div className="col-8">
-                                                        <div className="numbers">
-                                                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Today's Money</p>
-                                                            <h5 className="font-weight-bolder">
-                                                                $53,000
-                                                            </h5>
-                                                            <p className="mb-0">
-                                                                <span className="text-success text-sm font-weight-bolder">+55%</span>
-                                                                since yesterday
-                                                            </p>
-                                                        </div>
+                            <div className=" col-md-8 col-xl-4 col-sm-8 col-8">
+                                <div className="card h-100">
+                                    <div className="card-body p-3">
+                                        <div className="row">
+                                            <div className="col-8">
+                                                <p className="text-sm mb-3 mt-4 text-uppercase font-weight-bold">Warden</p>
+                                                <div class="d-flex flex-column justify-content-start align-items-between">
+                                                    <div class="d-flex flex-row justify-content-around">
+                                                        <p className="mb-2">
+                                                            Name :
+                                                        </p>
+                                                        <p className="mb-2">
+                                                            Name
+                                                        </p>
                                                     </div>
-                                                    <div className="col-4 text-end">
-                                                        <div className="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
-                                                            <i className="ni ni-money-coins text-lg opacity-10" aria-hidden="true" />
-                                                        </div>
+                                                    <div class="d-flex flex-row justify-content-around">
+                                                        <p className="mb-2">
+                                                            Email :
+                                                        </p>
+                                                        <p className="mb-2">
+                                                            Email
+                                                        </p>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-                                        <div className="card">
-                                            <div className="card-body p-3">
-                                                <div className="row">
-                                                    <div className="col-8">
-                                                        <div className="numbers">
-                                                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Today's Users</p>
-                                                            <h5 className="font-weight-bolder">
-                                                                2,300
-                                                            </h5>
-                                                            <p className="mb-0">
-                                                                <span className="text-success text-sm font-weight-bolder">+3%</span>
-                                                                since last week
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-4 text-end">
-                                                        <div className="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                                                            <i className="ni ni-world text-lg opacity-10" aria-hidden="true" />
-                                                        </div>
+                                                    <div class="d-flex flex-row justify-content-around">
+                                                        <p className="mb-2">
+                                                            Phno. :
+                                                        </p>
+                                                        <p className="mb-2">
+                                                            Phno.
+                                                        </p>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div className="col-xl-6 col-sm-6 mb-xl-0 mb-4 mt-3">
-                                        <div className="card">
-                                            <div className="card-body p-3">
-                                                <div className="row">
-                                                    <div className="col-8">
-                                                        <div className="numbers">
-                                                            <p className="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
-                                                            <h5 className="font-weight-bolder">
-                                                                +3,462
-                                                            </h5>
-                                                            <p className="mb-0">
-                                                                <span className="text-danger text-sm font-weight-bolder">-2%</span>
-                                                                since last quarter
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-4 text-end">
-                                                        <div className="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                                            <i className="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true" />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                            <div className="col-4 text-end">
+
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-xl-6 col-sm-6 mt-3 mb-xl-0 mb-4">
-                                        <div className="card">
-                                            <div className="card-body p-3">
-                                                <div className="row">
-                                                    <div className="col-8">
-                                                        <div className="numbers">
-                                                            <p className="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
-                                                            <h5 className="font-weight-bolder">
-                                                                $103,430
-                                                            </h5>
-                                                            <p className="mb-0">
-                                                                <span className="text-success text-sm font-weight-bolder">+5%</span> than last month
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="col-4 text-end">
-                                                        <div className="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                                            <i className="ni ni-cart text-lg opacity-10" aria-hidden="true" />
-                                                        </div>
-                                                    </div>
+                                </div>
+                            </div>
+                            <div className=" col-md-8 col-xl-4 col-sm-8 col-8">
+                                <div className="card h-100 p-1">
+                                    <div className="card-body p-3">
+                                        <div className="row">
+                                            <div className="col">
+                                                <p className="mb-3 d-flex justify-content-start">
+                                                    ATTENDANCE PERCENTAGE :
+                                                </p>
+                                                <div class="progress" style={{ height: '35%' }}>
+                                                    <div class="progress-bar" role="progressbar" aria-label="Example with label" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                </div>
+                                                <div className='mt-2 mb-3 d-flex justify-content-end' >
+                                                    <h1 className='display-3 mt-1'> 25% </h1>
                                                 </div>
                                             </div>
                                         </div>
@@ -260,19 +225,29 @@ export default function Dashboard() {
                         </div>
                         <div className="row mt-4 mb-4">
                             <div className="col-lg-12 mb-lg-0 mb-4">
-                                <div className="card ">
-                                    <div className="card-header pb-0 p-3">
+                                <div className="card shadow-lg">
+                                    <div className="card-header pb-0 p-3" id="announce-bg">
                                         <div className="d-flex justify-content-between">
                                             <h6 className="mb-2">Announcement</h6>
                                         </div>
                                     </div>
-                                    <div className="card-body">
-                                        <div className='col-md-12'>
-                                            <span className="px-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex aperiam pariatur odio, perspiciatis, sunt id nisi laborum debitis nemo error tenetur facilis magni! In dolorum iure vero excepturi autem veniam.</span>
-                                        </div>
-                                        <div className='col-md-12'>
-                                            <span className="px-2">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex aperiam pariatur odio, perspiciatis, sunt id nisi laborum debitis nemo error tenetur facilis magni! In dolorum iure vero excepturi autem veniam.</span>
-                                        </div>
+                                    <div className="card-body" id="announce-bg">
+                                        {
+                                            announcement.length === 0 ?
+
+                                                <NoAnnouncement />
+
+                                                :
+
+                                                announcement && announcement.map((announce) => {
+                                                    return (
+
+                                                        <div className='col-md-12' key={announce.id}>
+                                                            <span className="px-2 d-flex justify-content-start" >{announce.circular}</span>
+                                                        </div>
+                                                    )
+                                                })
+                                        }
                                     </div>
                                 </div>
                             </div>
