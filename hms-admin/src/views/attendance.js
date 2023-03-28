@@ -4,24 +4,30 @@ import Sidebar from "../components/sidebar";
 import { getAttByDate } from "../service/attendanceService";
 
 export default function Attendance() {
+  
   const [attHistory, setattHistory] = useState([]);
-  const [date,setdate] = useState('');
+  const [date, setdate] = useState('');
+  const admincode = localStorage.getItem('admincode');
 
-  useEffect(() => {
+  const submitDate = (e) => {
+    e.preventDefault();
+
+    console.log(date);
     try {
-      getAttByDate("23-03-2023").then((res) => {
+      getAttByDate(date, admincode).then((res) => {
         setattHistory(res.data);
+        console.log(res);
       });
     } catch (err) {
       console.log(`ERROR: ${err.message}`);
     }
-  }, []);
+  };
 
   const handleChange = (e) => {
     e.preventDefault();
-    const {name,value} = e.target;
+
+    const { name, value } = e.target;
     setdate(value);
-    console.log(setdate);
   };
 
   return (
@@ -38,14 +44,13 @@ export default function Attendance() {
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="row">
                     <div className="col-6">
-                      <form>
+                      <form onSubmit={submitDate}>
                         <label for="date" id="label1">
                           Select Date :{" "}
                         </label>
                         <input name="name" type="date" id="date" onChange={handleChange} />
                         <input
                           type="submit"
-                          onClick={()=>{}}
                           class="btn btn-primary btn-sm mx-2 mb-1"
                         ></input>
                       </form>
