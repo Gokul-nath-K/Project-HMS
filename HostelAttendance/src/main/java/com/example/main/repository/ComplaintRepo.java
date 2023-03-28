@@ -17,7 +17,7 @@ public interface ComplaintRepo extends JpaRepository<Complaint, Integer>{
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE Complaint c SET c.status = 'seen' WHERE s.rollno = ?1")
+	@Query("UPDATE Complaint c SET c.status = 'seen' WHERE c.rollno = ?1")
 	public void complaintapproval(String rollno);
 
 }

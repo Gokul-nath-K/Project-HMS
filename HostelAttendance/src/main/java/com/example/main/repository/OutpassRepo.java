@@ -24,4 +24,7 @@ public interface OutpassRepo extends JpaRepository<Outpass, Integer> {
 	@Transactional
 	@Query("UPDATE Outpass o SET o.status = :status where o.id = :id")
 	public Integer updateOutpass(String status, int id);
+
+	@Query("select count(o) from Outpass o where o.block = ?1 and o.status = 'pending'")
+	public List<Integer> outpassCount(String block);
 }	

@@ -17,21 +17,27 @@ public class SOSTable {
 	private int id;
 	private String rollno;
 	private String name;
+	private String block;
+	private String roomno;
 	private String datetime;
 	private boolean isactive;
 	private String reason;
 	public SOSTable() {
 		 
 	}
-	public SOSTable(int id, String rollno, String name, String datetime, boolean isactive, String reason) {
+	public SOSTable(int id, String rollno, String name, String block, String roomno, String datetime, boolean isactive,
+			String reason) {
 		super();
 		this.id = id;
 		this.rollno = rollno;
 		this.name = name;
+		this.block = block;
+		this.roomno = roomno;
 		this.datetime = datetime;
 		this.isactive = isactive;
 		this.reason = reason;
 	}
+
 	public int getId() {
 		return id;
 	}
@@ -49,6 +55,18 @@ public class SOSTable {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getBlock() {
+		return block;
+	}
+	public void setBlock(String block) {
+		this.block = block;
+	}
+	public String getRoomno() {
+		return roomno;
+	}
+	public void setRoomno(String roomno) {
+		this.roomno = roomno;
 	}
 	public String getDatetime() {
 		return datetime;
