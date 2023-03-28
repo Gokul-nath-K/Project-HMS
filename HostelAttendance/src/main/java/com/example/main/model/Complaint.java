@@ -20,25 +20,31 @@ public class Complaint {
 	private String block;
 	private int roomno;
 	private String complaint;
+	private String status;
+	
 	private String date;
 	private String time;
-
+	
 	public Complaint() {
 
 	}
 
-	public Complaint(int id, String name, String rollno, String block, int roomno, String complaint, String date,
-			String time) {
-		super();
+	
+
+	public Complaint(int id, String name, String rollno, String block, int roomno, String complaint, String status,
+			String date, String time) {
 		this.id = id;
 		this.name = name;
 		this.rollno = rollno;
 		this.block = block;
 		this.roomno = roomno;
 		this.complaint = complaint;
+		this.status = status;
 		this.date = date;
 		this.time = time;
 	}
+
+
 
 	public String getDate() {
 		return date;
@@ -62,6 +68,13 @@ public class Complaint {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getName() {
