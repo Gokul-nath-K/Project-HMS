@@ -58,13 +58,13 @@ export default function Sidebar() {
                     </ul>
                 </div>
                 <div className="sidenav-footer mx-3 ">
-                    <div className="card card-plain shadow-none" id="sidenavCard">
+                    {/* <div className="card card-plain shadow-none" id="sidenavCard">
                         <img className="w-50 mx-auto brx-img mt-2 img-shadowx" src="https://ik.imagekit.io/gokul/hms/marie.jpg?updatedAt=1679381623884" alt="sidebar_illustration" />
                         <div className="card-body text-center p-3 w-100 pt-0">
                             <div className="docs-info">
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <button onClick={handleLogout} className="btn btn-danger btn-sm w-50 mb-3">Logout</button>
                 </div>
             </aside>
