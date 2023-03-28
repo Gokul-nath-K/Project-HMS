@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './App.css'
 import { userContext } from './Data/userContext';
 import { Routes, Route } from 'react-router-dom';
@@ -7,25 +7,12 @@ import Dashboard from './views/dashboard'
 import Profile from './views/profile'
 import Outpass from './views/outpass'
 import Complain from './views/complain';
-import { getStudent } from './services/studentService';
 
 function App() {
 
-  const rollno = localStorage.getItem('rollno');
   const [student, setStudent] = useState({});
 
-  useEffect(() => {
-
-    try {
-      getStudent(rollno).then((res) => {
-        console.log(res);
-        setStudent(res.data);
-      })
-    }
-    catch (err) {
-      console.log(`Error: ${err.message}`);
-    }
-  }, [rollno])
+  
 
   return (
     <>
