@@ -24,7 +24,7 @@ function App() {
           <Route path='/profile' element={<Profile />} />
           <Route path='/outpass' element={<Outpass />} />
           <Route path='/complaint' element={<Complaint />} />
-          <Route path='/add' element={<Attendancepop />} />
+          <Route path='/Attendancepop' element={<Attendancepop />} />
         </Routes>
       </userContext.Provider>
     </div>
