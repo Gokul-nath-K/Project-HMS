@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/sidebar";
+import { getAttByDate } from "../service/attendanceService";
 
 export default function Attendance() {
+  const [attHistory, setattHistory] = useState([]);
+  const [date,setdate] = useState('');
+
+  useEffect(() => {
+    try {
+      getAttByDate("23-03-2023").then((res) => {
+        setattHistory(res.data);
+      });
+    } catch (err) {
+      console.log(`ERROR: ${err.message}`);
+    }
+  }, []);
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    const {name,value} = e.target;
+    setdate(value);
+    console.log(setdate);
+  };
+
   return (
     <>
       <Sidebar />
@@ -16,75 +37,62 @@ export default function Attendance() {
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="row">
-                    <div className="col-md-12 ">
-                      <div className="d-flex justify-content-center mid-center">
-                        {/* <h6>Select Date :</h6>
-                        <input type="date" /> */}
-                        <Link to='/add' class="btn btn-primary">Take Attendance</Link>                        
-                      </div>
+                    <div className="col-6">
+                      <form>
+                        <label for="date" id="label1">
+                          Select Date :{" "}
+                        </label>
+                        <input name="name" type="date" id="date" onChange={handleChange} />
+                        <input
+                          type="submit"
+                          onClick={()=>{}}
+                          class="btn btn-primary btn-sm mx-2 mb-1"
+                        ></input>
+                      </form>
+                    </div>
+                    <div className="col-6">
+                      <Link
+                        to="/Attendancepop"
+                        type="button"
+                        class="btn btn-primary btn-sm"
+                      >
+                        Take Attendance
+                      </Link>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <div className="card mb-4">
-                <div className="card-header pb-0">
-                  <h6>Attendance History</h6>
-                </div>
                 <div className="card-body px-0 pt-0 pb-2">
-                  <div className="table-responsive p-0">
-                    <table className="table align-items-center mb-0">
-                      <thead>
-                        <tr>
-                          <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-100">
-                            Name
-                          </th>
-                          <th className="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                            Roll-No
-                          </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Block
-                          </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Room-No
-                          </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Date
-                          </th>
-                          <th className="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                            Attendance
-                          </th>
-                          <th className="text-secondary opacity-7" />
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>
-                            <div className="d-flex flex-column align-content-center">
-                              <h6 className="mb-0 text-sm">John Michael</h6>
-                            </div>
-                          </td>
-                          <td>
-                          < h6 className="mb-0 text-sm">727821TUAD001</h6>
-                          </td>
-                          <td className="align-middle text-center text-sm">
-                            <h6 className="mb-0 text-sm">A</h6>
-                          </td>
-                          <td className="align-middle text-center">
-                            <h6 className="mb-0 text-sm">101</h6>
-                          </td>
-                          <td className="align-middle text-center">
-                            <h6 className="mb-0 text-sm">11-03-2023</h6>
-                          </td>
-                          <td className="align-middle">
-                            <h6>Present</h6>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div className="table-responsive p-4">
+                    <div>
+                      <div className="row">
+                        <table className="table table-striped table-bordered">
+                          <thead style={{ textAlign: "center" }}>
+                            <tr>
+                              <th> Name</th>
+                              <th> Roll-No</th>
+                              <th> Block</th>
+                              <th> Room-No</th>
+                              <th> Attendance</th>
+                            </tr>
+                          </thead>
+                          <tbody
+                            style={{ textAlign: "center", color: "black" }}
+                          >
+                            {attHistory.map((history) => {
+                              return (
+                                <tr key={history.id}>
+                                  <td> {history.name}</td>
+                                  <td> {history.rollno}</td>
+                                  <td> {history.block} </td>
+                                  <td> {history.roomno}</td>
+                                  <td> {history.status}</td>
+                                </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
