@@ -78,7 +78,7 @@ export default function Dashboard() {
 
             try {
 
-                postSOS(sosdata).then();
+                postSOS(sosdata).then(resetForm());
             }
             catch (err) {
                 console.log(`ERROR : ${err.message}`);
@@ -100,8 +100,8 @@ export default function Dashboard() {
                                         <div className="row">
                                             <div className="col-8">
                                                 <p className="text-sm mb-3 mt-4 text-uppercase font-weight-bold">Warden</p>
-                                                <div class="d-flex flex-column justify-content-start align-items-between">
-                                                    <div class="d-flex flex-row justify-content-around">
+                                                <div className="d-flex flex-column justify-content-start align-items-between">
+                                                    <div className="d-flex flex-row justify-content-around">
                                                         <p className="mb-2">
                                                             Name :
                                                         </p>
@@ -109,7 +109,7 @@ export default function Dashboard() {
                                                             Name
                                                         </p>
                                                     </div>
-                                                    <div class="d-flex flex-row justify-content-around">
+                                                    <div className="d-flex flex-row justify-content-around">
                                                         <p className="mb-2">
                                                             Email :
                                                         </p>
@@ -117,7 +117,7 @@ export default function Dashboard() {
                                                             Email
                                                         </p>
                                                     </div>
-                                                    <div class="d-flex flex-row justify-content-around">
+                                                    <div className="d-flex flex-row justify-content-around">
                                                         <p className="mb-2">
                                                             Phno. :
                                                         </p>
@@ -142,8 +142,8 @@ export default function Dashboard() {
                                                 <p className="mb-3 d-flex justify-content-start">
                                                     ATTENDANCE PERCENTAGE :
                                                 </p>
-                                                <div class="progress" style={{ height: '35%' }}>
-                                                    <div class="progress-bar" role="progressbar" aria-label="Example with label" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                <div className="progress" style={{ height: '35%' }}>
+                                                    <div className="progress-bar" role="progressbar" aria-label="Example with label" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
                                                 </div>
                                                 <div className='mt-2 mb-3 d-flex justify-content-end' >
                                                     <h1 className='display-3 mt-1'> 25% </h1>
@@ -210,12 +210,21 @@ export default function Dashboard() {
                                             </div>
                                             <div className="row">
                                                 <div className="col">
-                                                    <button
-                                                        type="submit"
-                                                        className="btn pt-2 btn-primary "
-                                                    >
-                                                        Send request
-                                                    </button>
+
+                                                    <a href="#" style={{
+                                                        "display": "inline-block",
+                                                        "position": "relative",
+                                                        "zIndex": 1,
+                                                        "padding": "2em",
+                                                        "margin": "-2em"
+                                                    }}>
+                                                        <button
+                                                            type="submit"
+                                                            className="btn pt-2 btn-primary "
+                                                        >
+                                                            Send request
+                                                        </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </form>
@@ -253,8 +262,8 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
-                </main>
-            </div>
+                </main >
+            </div >
 
 
         </>
