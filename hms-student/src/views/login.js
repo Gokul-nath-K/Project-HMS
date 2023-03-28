@@ -68,7 +68,6 @@ export default function Login() {
 
     }, [user])
 
-  const [temp, setTemp] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -78,8 +77,6 @@ export default function Login() {
 
                 loginUser(user).then((res) => {
 
-                    setTemp(res.data);
-                    console.log(res.data);
                     if (res.data) {
 
                         localStorage.setItem("rollno", user.rollno);
@@ -92,7 +89,6 @@ export default function Login() {
 
                         alert('Invalid email and password')
                     }
-                    console.log(temp);
                 })
             }
         }
