@@ -21,9 +21,9 @@ export default function Sidebar() {
                 </div>
                 <hr className="horizontal dark mt-0" />
                 <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
-                    <ul className="navbar-nav">
+                    <ul className="navbar-nav nav-pills">
                         <li className="nav-item">
-                            <Link to="/dashboard" className="nav-link active">
+                            <Link to="/dashboard" className={window.location.pathname === "/dashboard" ? "nav-link active" : "nav-link"}>
                                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i className="ni ni-tv-2 text-success text-sm opacity-10" />
                                 </div>
@@ -31,7 +31,7 @@ export default function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/attendance" className="nav-link ">
+                            <Link to="/attendance" className={window.location.pathname === "/attendance" ? "nav-link active" : "nav-link"}>
                                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i className="ni ni-calendar-grid-58 text-warning text-sm opacity-10" />
                                 </div>
@@ -39,7 +39,7 @@ export default function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/outpass" className="nav-link ">
+                            <Link to="/outpass" className={window.location.pathname === "/outpass" ? "nav-link active" : "nav-link"}>
                                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i className="ni ni-single-copy-04 text-primary text-sm opacity-10" />
                                 </div>
@@ -47,7 +47,7 @@ export default function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/complaint" className="nav-link ">
+                            <Link to="/complaint" className={window.location.pathname === "/complaint" ? "nav-link active" : "nav-link"}>
                                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i className="ni ni-books text-warning text-sm opacity-10" />
                                 </div>
@@ -55,11 +55,11 @@ export default function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/profile" className="nav-link ">
+                            <Link to="/profile" className={window.location.pathname === "/profile" ? "nav-link active" : "nav-link"}>
                                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i className="ni ni-single-02 text-dark text-sm opacity-10" />
                                 </div>
-                                <span className="nav-link-text ms-1">Profile</span>
+                                <span className="nav-link-text ms-1">My Profile</span>
                             </Link>
                         </li>
                     </ul>
