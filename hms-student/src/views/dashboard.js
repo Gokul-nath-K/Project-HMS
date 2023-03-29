@@ -3,16 +3,19 @@ import { NoAnnouncement } from '../components/no_announcement';
 import Sidebar from '../components/sidebar';
 import Sos from '../components/sos';
 // import { userContext } from '../Data/userContext';
-import { getAnnouncement, postSOS } from '../services/studentService';
+import { getAnnouncement, getPercentage, postSOS } from '../services/studentService';
 
 export default function Dashboard() {
 
     // const { student } = useContext(userContext);
     const [error, setError] = useState({});
     const [announcement, setAnnouncement] = useState([]);
-
+    let [percentage, setPercentage] = useState();
     useEffect(() => {
+
+        let rollno = localStorage.getItem('rollno');
         try {
+            getPercentage(rollno).then(res => setPercentage(res.data));
             getAnnouncement().then((res) => { setAnnouncement(res.data); });
         }
         catch (err) {
@@ -143,10 +146,10 @@ export default function Dashboard() {
                                                     ATTENDANCE PERCENTAGE :
                                                 </p>
                                                 <div className="progress" style={{ height: '35%' }}>
-                                                    <div className="progress-bar" role="progressbar" aria-label="Example with label" style={{ width: "25%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
+                                                    <div className="progress-bar" role="progressbar" aria-label="Example with label" style={{ width: percentage+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{ }</div>
                                                 </div>
                                                 <div className='mt-2 mb-3 d-flex justify-content-end' >
-                                                    <h1 className='display-3 mt-1'> 25% </h1>
+                                                    <h1 className='display-3 mt-1'> { percentage }% </h1>
                                                 </div>
                                             </div>
                                         </div>
