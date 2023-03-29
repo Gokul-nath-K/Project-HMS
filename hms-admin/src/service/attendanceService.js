@@ -46,6 +46,7 @@ export const getAttByDate = (date, id) => {
     return axios.get(`${ATTENDANCE_API_BASE_URL}/history/` + date + `/` + id);
 }
 
+<<<<<<< HEAD
 export const studentCount = (adminCode) => {
 
     return axios.get(`${ATTENDANCE_API_BASE_URL}/studentscount/` + adminCode);
@@ -76,4 +77,21 @@ export const getPendingComplaints = (block) => {
 
 export const getComplaintsHistory = (block) => {
     return axios.get(ATTENDANCE_API_BASE_URL + '/sortbyview/' + block);
+=======
+export const getAllComplaints = ( block ) => {
+    return axios.get(ATTENDANCE_API_BASE_URL + '/sortbyview/' + block);
+}
+
+export const getPendingComplaints = ( status ) => {
+    
+    return axios.get(ATTENDANCE_API_BASE_URL + '/getallpendingcomplaint?status=' + status);
+}
+
+export const updateComplaint = ( id, status ) => {
+    return axios.put(ATTENDANCE_API_BASE_URL + '/updatecomplaint?id=' + id + '&status=' + status);
+}
+
+export const getAllSoss = () => {
+    return axios.get(ATTENDANCE_API_BASE_URL + '/sosrequest');
+>>>>>>> c5250b14b666a792db5c8d3d6967860bb750a3af
 }
