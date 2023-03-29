@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import { postOutpass } from "../services/studentService";
 
 export default function Outpass() {
-  const [outpass, setOutpass] = useState({name:"", rollno:"", block:'', roomno:'', outdt:'', indt:'', reason:'', status:'pending'});
+  const [outpass, setOutpass] = useState({
+    name: "",
+    rollno: "",
+    block: "",
+    roomno: "",
+    outdt: "",
+    indt: "",
+    reason: "",
+    status: "pending",
+  });
   const [error, setError] = useState({});
 
   const handleChange = (e) => {
@@ -40,9 +50,9 @@ export default function Outpass() {
         setOutpass({ ...outpass, indt: value });
 
         break;
-      
+
       case "reason":
-          setOutpass({ ...outpass, reason: value });
+        setOutpass({ ...outpass, reason: value });
 
         break;
 
@@ -69,7 +79,7 @@ export default function Outpass() {
     if (!value.roomno) {
       errors.room = "Please enter room number";
     }
-    
+
     if (!value.reason) {
       errors.reason = "Please enter room number";
     }
@@ -81,15 +91,20 @@ export default function Outpass() {
     setError(validateForm(outpass));
   }, [outpass]);
 
+  const navigate = useNavigate();
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(outpass);
     if (Object.keys(error).length === 0) {
-      postOutpass(outpass).then();
+      postOutpass(outpass).then(document.getElementById("form-id").reset());
     } else {
       console.log("enter valid form details");
     }
+
+    navigate("/history");
+
   };
 
   return (
@@ -106,7 +121,7 @@ export default function Outpass() {
                   </div>
                 </div>
                 <div className="card-body">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit} id='form-id'>
                     <div className="controls">
                       <div className="row">
                         <div className="col-md-6 p-2 px-3">
@@ -127,7 +142,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
-                                justifyContent: "flex-end"
+                                justifyContent: "flex-end",
                               }}
                             >
                               {error.name}
@@ -152,7 +167,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
-                                justifyContent: "flex-end"
+                                justifyContent: "flex-end",
                               }}
                             >
                               {error.rollno}
@@ -200,7 +215,7 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
-                                justifyContent: "flex-end"
+                                justifyContent: "flex-end",
                               }}
                             >
                               {error.room}
@@ -251,14 +266,14 @@ export default function Outpass() {
                                 display: "flex",
                                 padding: 4,
                                 paddingLeft: 10,
-                                justifyContent: "flex-end"
+                                justifyContent: "flex-end",
                               }}
                             >
                               {error.reason}
                             </span>
                           </div>
                         </div>
-                        </div>
+                      </div>
                       <div className="row">
                         <div className="col-md-12">
                           <button
