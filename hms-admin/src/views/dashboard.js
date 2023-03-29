@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/sidebar';
 
 export default function Dashboard() {
+
+    var [date, setDate] = useState(new Date());
+
+    useEffect( () => {
+        var timer = setInterval( () => setDate( new Date()), 1000)
+        return function cleanup() {
+            clearInterval(timer)
+        }
+    });
+    
     return (
         <>
             <Sidebar/>
@@ -99,8 +109,9 @@ export default function Dashboard() {
                             
                         <div className="col-4">
                             <div className="card h-100 bg-danger">
-                                <div className="p-2 mx-5 mt-5 rounded">
-                                    <h1 className="text-center text-white p-2">Calendar</h1>
+                                <div className="p-3 mx-5 mt-4 rounded">
+                                    <h4 className="text-center text-white p-2">Time : {date.toLocaleTimeString()}</h4>
+                                    <h4 className="text-center text-white p-2">Date : {date.toLocaleDateString()}</h4>
                                 </div>
                             </div>
                         </div>

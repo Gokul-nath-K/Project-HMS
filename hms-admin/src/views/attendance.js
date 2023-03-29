@@ -44,18 +44,9 @@ export default function Attendance() {
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="row">
                     <div className="col-6">
-                      <form onSubmit={submitDate}>
-                        <label for="date" id="label1">
-                          Select Date :{" "}
-                        </label>
-                        <input name="name" type="date" id="date" onChange={handleChange} />
-                        <input
-                          type="submit"
-                          class="btn btn-primary btn-sm mx-2 mb-1"
-                        ></input>
-                      </form>
+                      
                     </div>
-                    <div className="col-6">
+                    <div className="col-6 ps-10">
                       <Link
                         to="/Attendancepop"
                         type="button"
@@ -65,6 +56,24 @@ export default function Attendance() {
                       </Link>
                     </div>
                   </div>
+                  <div className="row">
+                    <div className="col-6"></div>
+                    <div className="col-3 d-flex justify-content-end">
+                    <form onSubmit={submitDate}>
+                        <label for="date" id="label1">
+                          Select Date : {" "}
+                        </label>
+                        <input name="name" type="date" id="date" onChange={handleChange} />
+                       
+                      </form>
+                    </div>   
+                    <div className="col-3 d-flex justify-content-start">
+                      <input
+                          type="submit"
+                          class="btn btn-primary btn-sm mb-1"
+                        ></input>
+                    </div>
+                    </div>   
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="table-responsive p-4">
