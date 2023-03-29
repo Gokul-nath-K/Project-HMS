@@ -146,4 +146,14 @@ public class StudentService {
 		return ( noOfPresent.get(0)/totalDays.get(0) ) * 100.00 ;
 	}
 
+	public List<Outpass> outpassHistory(String rollno) {
+
+		return outpass.outpassHistory(rollno);
+	}
+
+	public List<Complaint> complaintHistory(String rollno) {
+
+		return complaint.complaintHistory(rollno);
+	}
+
 }

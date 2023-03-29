@@ -139,4 +139,22 @@ public class StudentController {
 		return  String.format("%.2f", service.getPercentage(rollno));
 	}
 
+	@Operation(summary = "Get a Student's Outpass History with rollno")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Student's Outpass History successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
+	@GetMapping(produces = "application/json",value = "/outpasshistory/{rollno}")
+	public List<Outpass> outpassHistory(@PathVariable String rollno){
+		
+		return service.outpassHistory(rollno);
+	}
+	
+	@Operation(summary = "Get a Student's Complaint History with rollno")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Student's Complaint History successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
+	@GetMapping(produces = "application/json",value = "/complainthistory/{rollno}")
+	public List<Complaint> complaintHistory(@PathVariable String rollno){
+		
+		return service.complaintHistory(rollno);
+	}
+
 }
