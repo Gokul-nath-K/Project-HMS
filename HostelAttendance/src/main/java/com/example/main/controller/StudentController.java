@@ -130,4 +130,13 @@ public class StudentController {
 		return service.getAdmin(rollno);
 	}
 
+	@Operation(summary = "Get a Student's Attendance % with rollno")
+	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Getting Student's Attendance % successfully"),
+	              @ApiResponse(responseCode = "404",description = "Invalid Credentials")})
+	@GetMapping(produces = "application/json",value = "/getpercentage/{rollno}")
+	public String getPercentage(@PathVariable String rollno){
+		
+		return  String.format("%.2f", service.getPercentage(rollno));
+	}
+
 }

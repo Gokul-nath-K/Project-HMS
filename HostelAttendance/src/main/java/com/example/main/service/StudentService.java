@@ -18,6 +18,7 @@ import com.example.main.model.StudentDashboard;
 import com.example.main.model.StudentUsers;
 import com.example.main.repository.AdminDashboardRepo;
 import com.example.main.repository.AnnouncementRepo;
+import com.example.main.repository.AttendanceRepo;
 import com.example.main.repository.ComplaintRepo;
 import com.example.main.repository.DashboardRepo;
 import com.example.main.repository.OutpassRepo;
@@ -41,6 +42,8 @@ public class StudentService {
 	AnnouncementRepo announcement;
 	@Autowired
 	AdminDashboardRepo admin;
+	@Autowired
+	AttendanceRepo attendance;
 	
 	
 	public void post(StudentUsers S) {
@@ -133,6 +136,14 @@ public class StudentService {
 		
 		StudentDashboard s = profile.getById(rollno);
 		return admin.getadmin(s.getBlock());
+	}
+
+	public double getPercentage(String rollno){
+		
+		List<Float> noOfPresent = attendance.getPercentage(rollno);
+		List<Float> totalDays = attendance.getDays();
+		
+		return ( noOfPresent.get(0)/totalDays.get(0) ) * 100.00 ;
 	}
 
 }
