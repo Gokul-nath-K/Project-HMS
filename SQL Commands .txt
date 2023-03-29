@@ -17,13 +17,13 @@ values("CS010","jai@skct.edu.in","Skct12345"),
 ("CS030","dhanush@skct.edu.in","Skct12345"),
 ("AD030","velu@skct.edu.in","Skct12345");
 
-Insert into student_dashboard(rollno,block,bloodgroup,dept,email,gaurdian_phone,name,personal_phone,roomno,year,dob)
-values("727821TUAD017","A","O+ve","ADS","727821tuad017@skct.edu.in",9922334455,"Guru Charan R",121,2,"27/07/2003"),
-("727821TUAD001","A","B+ve","ADS","727821tuad001@skct.edu.in",9922334455,"Aathithiya D",121,2,"04/12/2003"),
-("727821TUCS027","B","O+ve","CSE","727821tucs027@skct.edu.in",9922334455,"Baranidharan S",221,2,"27/07/2003"),
-("727821TUCS052","B","O+ve","CSE","727821tucs052@skct.edu.in",9922334455,"Gokul Nath K",221,2,"27/07/2003"),
-("727821TUIT027","C","O+ve","IT","727821tuit027@skct.edu.in",9922334455,"Raahul P",321,2,"27/07/2003"),
-("727821TUIT057","C","O+ve","IT","727821tuit057@skct.edu.in",9922334455,"Nitheesh S",321,2,"27/07/2003");
+Insert into student_dashboard(rollno,block,bloodgroup,dept,email,guardian_phone,name,personal_phone,roomno,year,dob)
+values("727821TUAD017","A","O+ve","ADS","727821tuad017@skct.edu.in",9922334455,"Guru Charan R",7766554433,121,2,"27/07/2003"),
+("727821TUAD001","A","B+ve","ADS","727821tuad001@skct.edu.in",9922334455,"Aathithiya D",7766554433,121,2,"04/12/2003"),
+("727821TUCS027","B","O+ve","CSE","727821tucs027@skct.edu.in",9922334455,"Baranidharan S",7766554433,221,2,"27/07/2003"),
+("727821TUCS052","B","O+ve","CSE","727821tucs052@skct.edu.in",9922334455,"Gokul Nath K",7766554433,221,2,"27/07/2003"),
+("727821TUIT027","C","O+ve","IT","727821tuit027@skct.edu.in",9922334455,"Raahul P",7766554433,321,2,"27/07/2003"),
+("727821TUIT057","C","O+ve","IT","727821tuit057@skct.edu.in",9922334455,"Nitheesh S",7766554433,321,2,"27/07/2003");
 
 Insert into student_users(rollno,email,password)
 values("727821TUAD017","727821tuad017@skct.edu.in","Skct12345"),
@@ -31,4 +31,4 @@ values("727821TUAD017","727821tuad017@skct.edu.in","Skct12345"),
 ("727821TUCS027","727821tucs027@skct.edu.in","Skct12345"),
 ("727821TUCS052","727821tucs052@skct.edu.in","Skct12345"),
 ("727821TUIT027","727821tuit027@skct.edu.in","Skct12345"),
-("727821TUIT057","727821tuit057@skct.edu.in","Skct12345"),
+("727821TUIT057","727821tuit057@skct.edu.in","Skct12345");
