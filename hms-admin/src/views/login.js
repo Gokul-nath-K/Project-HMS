@@ -76,6 +76,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
+
             if (Object.keys(error).length === 0) {
 
                 loginUser(user).then((res) => {
@@ -92,14 +93,13 @@ export default function Login() {
                                 localStorage.setItem("admincode", user.admincode);
                                 localStorage.setItem("email", user.email);
                                 localStorage.setItem("password", user.password);
-                                localStorage.setItem("block", admin.block);
                             });
                         }
                         catch (err) {
                             console.log(`Error: ${err.message}`);
                         }
-
-
+                        
+                        
                         navigate('/dashboard')
                         chechSOS();
                     }
