@@ -132,7 +132,7 @@ public class AdminService {
 
 		List<Complaint> sortedList = new ArrayList<>();
 		for (Complaint C : list) {
-			if(C.getBlock().equals(block) && C.getStatus().equals("allowed")){
+			if(C.getBlock().equals(block) && (C.getStatus().equals("Solved") || C.getStatus().equals("Rejected")) ){
 				sortedList.add(C);
 			}
 		}
