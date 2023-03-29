@@ -45,3 +45,35 @@ export const getAttByDate = (date, id) => {
 
     return axios.get(`${ATTENDANCE_API_BASE_URL}/history/` + date + `/` + id);
 }
+
+export const studentCount = (adminCode) => {
+
+    return axios.get(`${ATTENDANCE_API_BASE_URL}/studentscount/` + adminCode);
+}
+
+export const outpassCount = (adminCode) => {
+
+    return axios.get(`${ATTENDANCE_API_BASE_URL}/outpasscount/` + adminCode);
+}
+
+export const complainCount = (adminCode) => {
+
+    return axios.get(`${ATTENDANCE_API_BASE_URL}/complaintscount/` + adminCode);
+}
+
+export const sosCount = (adminCode) => {
+
+    return axios.get(`${ATTENDANCE_API_BASE_URL}/soscount/` + adminCode);
+}
+
+export const updateComplaint = (status, id) => {
+    return axios.put(ATTENDANCE_API_BASE_URL + '/complaint?status=' + status + '&id=' + id);
+}
+
+export const getPendingComplaints = (block) => {
+    return axios.get(ATTENDANCE_API_BASE_URL + '/sortbypending/' + block);
+}
+
+export const getComplaintsHistory = (block) => {
+    return axios.get(ATTENDANCE_API_BASE_URL + '/sortbyview/' + block);
+}
