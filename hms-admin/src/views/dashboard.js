@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Sidebar from '../components/sidebar';
+import { userContext } from '../Data/userContext';
+import { complainCount, outpassCount, sosCount, studentCount } from '../service/attendanceService';
 
 export default function Dashboard() {
 
@@ -12,14 +14,42 @@ export default function Dashboard() {
         }
     });
     
+    let adminCode;
+
+    let [student_count, setStudentCount] = useState();
+    let [pending_outpass, setPendingOutpass] = useState();;
+    let [pending_complaint, setPendingComplaint] = useState();
+    let [pending_sos, setPendingSOS] = useState();
+    const { admin, setAdmin } = useContext(userContext);
+    
+    localStorage.setItem("block", admin.block);
+
+    useEffect(() => {
+
+        adminCode = localStorage.getItem('admincode');
+
+        try {
+
+            studentCount(adminCode).then((res) => setStudentCount(res.data[0]));
+            complainCount(adminCode).then((res) => setPendingComplaint(res.data[0]));
+            outpassCount(adminCode).then((res) => setPendingOutpass(res.data[0]));
+            sosCount(adminCode).then((res) => setPendingSOS(res.data[0]));
+
+        }
+        catch (err) {
+            console.log(err);
+        }
+
+    }, [adminCode])
+
     return (
         <>
-            <Sidebar/>
+            <Sidebar />
             <main className="main-content position-relative border-radius-lg ">
                 <div className="container-fluid py-4">
                     <div className="row">
                         <div className=" col-8">
-                             <div className="row">
+                            <div className="row">
                                 <div className="col-xl-6 col-sm-6 mb-xl-0 mb-4">
                                     <div className="card">
                                         <div className="card-body p-3">
@@ -28,7 +58,7 @@ export default function Dashboard() {
                                                     <div className="numbers">
                                                         <p className="text-sm mb-0 text-uppercase font-weight-bold">Total No. of Students</p>
                                                         <h5 className="font-weight-bolder">
-                                                            10
+                                                            {student_count}
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -49,7 +79,7 @@ export default function Dashboard() {
                                                     <div className="numbers">
                                                         <p className="text-sm mb-0 text-uppercase font-weight-bold">Pending Outpass Requests</p>
                                                         <h5 className="font-weight-bolder">
-                                                            15
+                                                            {pending_outpass}
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -70,7 +100,7 @@ export default function Dashboard() {
                                                     <div className="numbers">
                                                         <p className="text-sm mb-0 text-uppercase font-weight-bold">Pending Complaints</p>
                                                         <h5 className="font-weight-bolder">
-                                                            7
+                                                            {pending_complaint}
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -91,7 +121,7 @@ export default function Dashboard() {
                                                     <div className="numbers">
                                                         <p className="text-sm mb-0 text-uppercase font-weight-bold">SOS</p>
                                                         <h5 className="font-weight-bolder">
-                                                            1
+                                                            {pending_sos}
                                                         </h5>
                                                     </div>
                                                 </div>
@@ -106,7 +136,7 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         </div>
-                            
+
                         <div className="col-4">
                             <div className="card h-100 bg-danger">
                                 <div className="p-3 mx-5 mt-4 rounded">
@@ -115,8 +145,8 @@ export default function Dashboard() {
                                 </div>
                             </div>
                         </div>
-                       </div>
-                       
+                    </div>
+
                     <div className="row mt-7 mb-4">
                         <div className="col-lg-12 mb-lg-0 mb-4">
                             <div className="card ">
@@ -234,7 +264,7 @@ export default function Dashboard() {
                                     </table>
                                 </div>
                             </div>
-                        </div>      
+                        </div>
                     </div>
                 </div>
             </main>

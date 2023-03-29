@@ -4,7 +4,7 @@ import Sidebar from "../components/sidebar";
 import { getAttByDate } from "../service/attendanceService";
 
 export default function Attendance() {
-  
+
   const [attHistory, setattHistory] = useState([]);
   const [date, setdate] = useState('');
   const admincode = localStorage.getItem('admincode');
@@ -44,7 +44,7 @@ export default function Attendance() {
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="row">
                     <div className="col-6">
-                      
+
                     </div>
                     <div className="col-6 ps-10">
                       <Link
@@ -56,24 +56,23 @@ export default function Attendance() {
                       </Link>
                     </div>
                   </div>
-                  <div className="row">
-                    <div className="col-6"></div>
-                    <div className="col-3 d-flex justify-content-end">
-                    <form onSubmit={submitDate}>
+                  <form onSubmit={submitDate}>
+                    <div className="row">
+                      <div className="col-6"></div>
+                      <div className="col-3 d-flex justify-content-end">
                         <label for="date" id="label1">
-                          Select Date : {" "}
+                          Select Date :
                         </label>
                         <input name="name" type="date" id="date" onChange={handleChange} />
-                       
-                      </form>
-                    </div>   
-                    <div className="col-3 d-flex justify-content-start">
-                      <input
+                      </div>
+                      <div className="col-3 d-flex justify-content-start">
+                        <input
                           type="submit"
                           class="btn btn-primary btn-sm mb-1"
                         ></input>
+                      </div>
                     </div>
-                    </div>   
+                  </form>
                 </div>
                 <div className="card-body px-0 pt-0 pb-2">
                   <div className="table-responsive p-4">
@@ -92,7 +91,7 @@ export default function Attendance() {
                           <tbody
                             style={{ textAlign: "center", color: "black" }}
                           >
-                            {attHistory.map((history) => {
+                            {attHistory && attHistory.map((history) => {
                               return (
                                 <tr key={history.id}>
                                   <td> {history.name}</td>
