@@ -10,15 +10,7 @@ export default function Profile() {
 
     useEffect(() => {
 
-        try {
-            getAdmin(admincode).then((res) => {
-                console.log(res.data);
-                setAdmin(res.data);
-            })
-        }
-        catch (err) {
-            console.log(`Error: ${err.message}`);
-        }
+        
     }, [admincode]);
     return (
         <>
