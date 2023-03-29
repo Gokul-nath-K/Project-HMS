@@ -150,9 +150,9 @@ public class AdminService {
 		sos.sosapproval(S.getRollno());
 	}
 
-	public void complaintapproval(Complaint C) {
+	public void complaintapproval(String status, int id) {
 
-		complaint.complaintapproval(C.getRollno());
+		complaint.complaintapproval(status, id);
 	}
 
 	public void announcement(Announcement A) {

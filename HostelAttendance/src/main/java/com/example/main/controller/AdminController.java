@@ -153,9 +153,9 @@ public class AdminController {
 	@ApiResponses(value = {@ApiResponse(responseCode = "200",description = "Requests are approved/pending"),
 	              @ApiResponse(responseCode = "404",description = "Zero Entries")})
 	@PutMapping(produces = "application/json",value = "/complaint")
-	public void complaintapproval(@RequestBody Complaint C){
+	public void complaintapproval(@RequestParam String status, @RequestParam int id){
 		
-		service.complaintapproval(C);
+		service.complaintapproval(status, id);
 	}
 
 	@Operation(summary = "Creates a Circular/Announcement to the Students")
