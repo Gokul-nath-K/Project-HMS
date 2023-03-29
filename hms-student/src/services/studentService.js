@@ -24,3 +24,18 @@ export const getAnnouncement = () => {
 
     return axios.get(`http://localhost:8080/api/students/announcement`)
 }
+
+export const getPercentage = (rollno) => {
+
+    return axios.get(`http://localhost:8080/api/students/getpercentage/` + rollno);
+}
+
+export const getOutpassHistory = (rollno) => {
+
+    return axios.get(`http://localhost:8080/api/students/outpasshistory/` + rollno);
+}
+
+export const getComplaintHistory = (rollno) => {
+    
+    return axios.get(`http://localhost:8080/api/students/complainthistory/` + rollno);
+}
