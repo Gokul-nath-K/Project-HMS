@@ -5,23 +5,22 @@ function ListComplaintRequestComponent() {
 
   const [complaintReg, setcomplaintReg] = useState([]);
 
-
   function complaintApproval(id, status) {
-    updateComplaint(id, status).then(( res ) => fetchComplaintDetails());
+    updateComplaint(status, id).then((res) => fetchComplaintDetails());
   }
 
-  function fetchComplaintDetails() {
+  function fetchComplaintDetails( block ) {
     try {
-      getPendingComplaints("pending").then((res) => {
-        setcomplaintReg(res.data);
-      })
+      getPendingComplaints(block).then((res) => setcomplaintReg(res.data));
     }
     catch (err) {
       console.log(`ERROR: ${err.message}`);
     }
   }
   useEffect(() => {
-    fetchComplaintDetails();
+
+    let block = localStorage.getItem('block');
+    fetchComplaintDetails(block);
   }, []);
 
   return (
