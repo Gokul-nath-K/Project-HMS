@@ -24,7 +24,7 @@ function ListOutpassComponent() {
     <div>
       <div className="row">
         <div className="col d-flex justify-content-end mb-3">
-         <button className="btn btn-secondary mx-3" onClick={fetchoutpassList()}> reload </button>
+         <button className="btn btn-primary mx-3" onClick={fetchoutpassList()}> Reload </button>
         </div>
       </div>
       <div className="row">
