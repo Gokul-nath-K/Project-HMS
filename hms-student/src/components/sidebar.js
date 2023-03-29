@@ -47,6 +47,14 @@ export default function Sidebar() {
                             </Link>
                         </li>
                         <li className="nav-item">
+                            <Link to="/history" className={window.location.pathname === "/history" ? "nav-link active" : "nav-link"}>
+                                <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i className="ni ni-books text-warning text-sm opacity-10" />
+                                </div>
+                                <span className="nav-link-text ms-1">History</span>
+                            </Link>
+                        </li>
+                        <li className="nav-item">
                             <Link to="/profile" className={window.location.pathname === "/profile" ? "nav-link active" : "nav-link"}>
                                 <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                                     <i className="ni ni-single-02 text-dark text-sm opacity-10" />
@@ -64,7 +72,7 @@ export default function Sidebar() {
                             </div>
                         </div>
                     </div> */}
-                    <button onClick={handleLogout()} className="btn btn-danger btn-sm w-50 mb-3">Logout</button>
+                    <button onClick={() => handleLogout()} className="btn btn-danger btn-sm w-50 mb-3">Logout</button>
                 </div>
             </aside>
 
