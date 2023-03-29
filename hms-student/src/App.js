@@ -7,6 +7,7 @@ import Dashboard from './views/dashboard'
 import Profile from './views/profile'
 import Outpass from './views/outpass'
 import Complain from './views/complain';
+import Historys from './views/history'
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
             <Route path='/profile' element={<Profile />} />
             <Route path='/outpass' element={<Outpass />} />
             <Route path='/complain' element={<Complain />} />
+            <Route path='/history' element={<Historys />} />
           </Routes>
         </div>
       </userContext.Provider>
