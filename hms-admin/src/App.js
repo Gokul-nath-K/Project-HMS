@@ -9,6 +9,7 @@ import Complaint from './views/complaint';
 import Attendance from './views/attendance';
 import Attendancepop from './views/attendancepop';
 import { userContext } from './Data/userContext';
+import Sos from './views/sos';
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
           <Route path='/outpass' element={<Outpass />} />
           <Route path='/complaint' element={<Complaint />} />
           <Route path='/Attendancepop' element={<Attendancepop />} />
+          <Route path='/sos' element={<Sos/>}/>
         </Routes>
       </userContext.Provider>
     </div>

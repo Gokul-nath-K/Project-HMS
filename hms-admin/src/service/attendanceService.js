@@ -45,3 +45,20 @@ export const getAttByDate = (date, id) => {
 
     return axios.get(`${ATTENDANCE_API_BASE_URL}/history/` + date + `/` + id);
 }
+
+export const getAllComplaints = ( block ) => {
+    return axios.get(ATTENDANCE_API_BASE_URL + '/sortbyview/' + block);
+}
+
+export const getPendingComplaints = ( status ) => {
+    
+    return axios.get(ATTENDANCE_API_BASE_URL + '/getallpendingcomplaint?status=' + status);
+}
+
+export const updateComplaint = ( id, status ) => {
+    return axios.put(ATTENDANCE_API_BASE_URL + '/updatecomplaint?id=' + id + '&status=' + status);
+}
+
+export const getAllSoss = () => {
+    return axios.get(ATTENDANCE_API_BASE_URL + '/sosrequest');
+}

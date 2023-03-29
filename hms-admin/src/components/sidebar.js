@@ -62,6 +62,14 @@ export default function Sidebar() {
                                 <span className="nav-link-text ms-1">My Profile</span>
                             </Link>
                         </li>
+                        <li className="nav-item">
+                            <Link to="/sos" className={window.location.pathname === "/sos" ? "nav-link active" : "nav-link"}>
+                                <div className="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                                    <i className="ni ni-bell-55 text-dark text-sm opacity-10" />
+                                </div>
+                                <span className="nav-link-text ms-1">SOS History</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 <div className="sidenav-footer mx-3 ">
