@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/sidebar";
 import { postComplains } from "../services/studentService";
 
 export default function Complain() {
-  const [complains, setComplain] = useState({});
+  const [complains, setComplain] = useState({
+    name: "",
+    rollno: "",
+    block: "",
+    roomno: "",
+    complaint: "",
+    status: "pending",
+    time: "",
+    date: "",
+  });
   const [error, setError] = useState({});
 
   const handleChange = (e) => {
@@ -71,20 +81,24 @@ export default function Complain() {
     setError(validateForm(complains));
   }, [complains]);
 
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // console.log(complains);
     if (Object.keys(error).length === 0) {
       try {
-        postComplains(complains).then();
+        postComplains(complains).then(
+          document.getElementById("form-id").reset()
+        );
       } catch (err) {
         console.log(`Error: ${err.message}`);
       }
     } else {
-      console.log("enter valid form details");
-      alert("enter all required details")
+      alert("enter all required details");
     }
+
+    navigate("/history" );
   };
 
   return (
@@ -101,7 +115,7 @@ export default function Complain() {
                   </div>
                 </div>
                 <div className="card-body">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleSubmit} id="form-id">
                     <div className="controls">
                       <div className="row">
                         <div className="col-md-6 p-2 px-3">
@@ -162,7 +176,7 @@ export default function Complain() {
                               name="block"
                               className="form-control"
                               onChange={handleChange}
-                              value={complains.block}
+                              // value={complains.block}
                               defaultValue="--Select Your Block--"
                             >
                               <option value="--Select Your Block--" disabled>
