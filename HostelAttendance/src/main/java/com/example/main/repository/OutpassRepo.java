@@ -27,4 +27,7 @@ public interface OutpassRepo extends JpaRepository<Outpass, Integer> {
 
 	@Query("select count(o) from Outpass o where o.block = ?1 and o.status = 'pending'")
 	public List<Integer> outpassCount(String block);
+
+	@Query("select o from Outpass o where o.rollno = ?1")
+	public List<Outpass> outpassHistory(String rollno);
 }	
