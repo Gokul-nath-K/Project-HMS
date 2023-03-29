@@ -83,18 +83,20 @@ export default function Login() {
                         localStorage.setItem("email", user.email);
                         localStorage.setItem("password", user.password);
 
-                        navigate('/dashboard')
                     }
                     else {
-
+                        
                         alert('Invalid email and password')
                     }
+
                 })
             }
         }
         catch (err) {
             console.log(`Error: ${err.message}`);
         }
+        
+        navigate('/dashboard')
     }
     return (
         <>
