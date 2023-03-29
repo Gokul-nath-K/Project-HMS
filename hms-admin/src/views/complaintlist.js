@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getAllComplaints } from '../service/attendanceService'
+import { getAllComplaints, getComplaintsHistory } from '../service/attendanceService'
 
 function ListComplaintComponent() {
     
     const [Complaints, setComplaints] = useState([]);
     let block;
     
-    function fetchcomplaintList() {
+    function fetchcomplaintList(block) {
       
       block = localStorage.getItem('block');
       
       try {
-        getAllComplaints( block ).then((res) => { 
-          setComplaints(res.data);
-          console.log(res);
-        })
+        getComplaintsHistory(block).then(res => setComplaints(res.data))
       }
       catch(err) {
         console.log(`ERROR: ${err.message}`);
@@ -22,8 +19,9 @@ function ListComplaintComponent() {
       
     }
     useEffect(() => {
-      
-        fetchcomplaintList();
+
+    let block = localStorage.getItem('block');
+        fetchcomplaintList(block);
         
     }, []);
     
