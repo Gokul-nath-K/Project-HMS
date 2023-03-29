@@ -1,5 +1,7 @@
 import React from 'react'
 import Sidebar from '../components/sidebar'
+import ListComplaintComponent from './complaintlist'
+import ListComplaintRequestComponent from './complaintregistry'
 
 export default function Complaint() {
   return (
@@ -15,8 +17,8 @@ export default function Complaint() {
                               <h6>Complaints</h6>
                           </div>
                           <div className="card-body px-0 pt-0 pb-2">
-                              <div className="table-responsive p-0">
-                                  
+                              <div className="table-responsive p-4">
+                                 <ListComplaintRequestComponent/>
                               </div>
                           </div>
                       </div>
@@ -31,8 +33,8 @@ export default function Complaint() {
                               <h6>History Of Complaints</h6>
                           </div>
                           <div className="card-body px-0 pt-0 pb-2">
-                              <div className="table-responsive p-0">
-                                  
+                              <div className="table-responsive p-4">
+                                  <ListComplaintComponent />
                               </div>
                           </div>
                       </div>
